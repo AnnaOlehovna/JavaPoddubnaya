@@ -11,26 +11,26 @@ public class Main {
                 Далее замените наименьшее значение на 0, а наибольшее значение на 99
                 и выведите получившийся массив на экран в виде:[23, 0, 34, 99, 43534].*/
 
-       int[] firstArray={346,298,6,86,24,3,375,27,6089,761};
-       int minValue=firstArray[0];
-       int minIndex = 0;
-       int maxValue=firstArray[0];
-       int maxIndex=0;
-       for(int i=1;i<firstArray.length;i++){
-           if(minValue>firstArray[i]){
-               minValue=firstArray[i];
-               minIndex=i;
-           }
-           if(maxValue<firstArray[i]){
-               maxValue=firstArray[i];
-               maxIndex=i;
-           }
+        int[] firstArray = {346, 298, 6, 86, 24, 3, 375, 27, 6089, 761};
+        int minValue = firstArray[0];
+        int minIndex = 0;
+        int maxValue = firstArray[0];
+        int maxIndex = 0;
+        for (int i = 1; i < firstArray.length; i++) {
+            if (minValue > firstArray[i]) {
+                minValue = firstArray[i];
+                minIndex = i;
+            }
+            if (maxValue < firstArray[i]) {
+                maxValue = firstArray[i];
+                maxIndex = i;
+            }
 
-       }
-        System.out.println("min value = "+minValue);
-        System.out.println("max value = "+maxValue);
-        firstArray[minIndex]=0;
-        firstArray[maxIndex]=99;
+        }
+        System.out.println("min value = " + minValue);
+        System.out.println("max value = " + maxValue);
+        firstArray[minIndex] = 0;
+        firstArray[maxIndex] = 99;
         System.out.println(Arrays.toString(firstArray));
 
 
@@ -42,32 +42,35 @@ public class Main {
         System.out.println("*****************");
 
         int counter = 0;
+        boolean isDuplicate = false;
 
-        float[] secondArray = {5.0f, 6.0f, 9.0f, 3.0f, 5.0f, 9.0f, 9.0f, 7.0f, 9.0f, 4.0f};
+        float[] secondArray = {5.0f, 6.0f, 5.0f, 3.0f, 9.0f, 9.0f, 9.0f, 7.0f, 9.0f, 4.0f};
         for (int i = 0; i < secondArray.length; i++) {
 
             for (int j = 0; j < secondArray.length; j++) {
                 if (secondArray[i] == secondArray[j]) {
                     counter++;
+                    if (i > j) {
+                        isDuplicate = true;
+                        break;
+                    }
                 }
             }
-            if (counter > 1) {
+            if (counter > 1 && !isDuplicate) {
                 System.out.println("[" + secondArray[i] + "] - повторений " + counter);
             }
             counter = 0;
+            isDuplicate=false;
         }
-    }
-}
 
 
 
+    /* 3. Напишите программу, которая печатает массив,
+    затем инвертирует (то есть меняет местами первый элемент с последним,
+    второй — с предпоследним и т.д.), и вновь печатает.        */
+//        int[] thirdArray = {1, 2, 3, 4, 5};
+//        thirdArray.length
 
-
-
-
-       /* 3. Напишите программу, которая печатает массив,
-       затем инвертирует (то есть меняет местами первый элемент с последним,
-       второй — с предпоследним и т.д.), и вновь печатает.        */
 
 
        /* 4. Написать программу, определяющую, образуют ли цифры некоторого числа
@@ -79,4 +82,6 @@ public class Main {
          */
 
 
+    }
 
+}
