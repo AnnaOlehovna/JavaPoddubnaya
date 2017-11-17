@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -9,15 +11,37 @@ public class Main {
                 Далее замените наименьшее значение на 0, а наибольшее значение на 99
                 и выведите получившийся массив на экран в виде:[23, 0, 34, 99, 43534].*/
 
+       int[] firstArray={346,298,6,86,24,3,375,27,6089,761};
+       int minValue=firstArray[0];
+       int minIndex = 0;
+       int maxValue=firstArray[0];
+       int maxIndex=0;
+       for(int i=1;i<firstArray.length;i++){
+           if(minValue>firstArray[i]){
+               minValue=firstArray[i];
+               minIndex=i;
+           }
+           if(maxValue<firstArray[i]){
+               maxValue=firstArray[i];
+               maxIndex=i;
+           }
+
+       }
+        System.out.println("min value = "+minValue);
+        System.out.println("max value = "+maxValue);
+        firstArray[minIndex]=0;
+        firstArray[maxIndex]=99;
+        System.out.println(Arrays.toString(firstArray));
+
 
        /* 2. Создайте массив с 10-ю переменными типа float. Далее найдите дубликаты и выведите их количество.
         Пример: есть массив {2, 3, 5, 7, 6, 5, 7, 3, 7, 20} - в данном массиве цифра 3 и 7 повторяются.
                 В результате выполнения программы на экран должно вывести:
                 [3] - повторений 2
                 [7] - повторений 3*/
+        System.out.println("*****************");
 
         int counter = 0;
-        int indexRepeat = 0;
 
         float[] secondArray = {5.0f, 6.0f, 9.0f, 3.0f, 5.0f, 9.0f, 9.0f, 7.0f, 9.0f, 4.0f};
         for (int i = 0; i < secondArray.length; i++) {
