@@ -60,7 +60,7 @@ public class Main {
                 System.out.println("[" + secondArray[i] + "] - повторений " + counter);
             }
             counter = 0;
-            isDuplicate=false;
+            isDuplicate = false;
         }
 
 
@@ -68,8 +68,14 @@ public class Main {
     /* 3. Напишите программу, которая печатает массив,
     затем инвертирует (то есть меняет местами первый элемент с последним,
     второй — с предпоследним и т.д.), и вновь печатает.        */
-//        int[] thirdArray = {1, 2, 3, 4, 5};
-//        thirdArray.length
+        System.out.println("****************");
+        int[] thirdArray = {1, 2, 3, 4, 5};
+        int[] tempArray = new int[thirdArray.length];
+        System.out.println(Arrays.toString(thirdArray));
+        for (int i = 0; i < thirdArray.length; i++) {
+            tempArray[i] = thirdArray[thirdArray.length - 1 - i];
+        }
+        System.out.println(Arrays.toString(tempArray));
 
 
 
