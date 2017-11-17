@@ -26,11 +26,41 @@ public class Main {
                 max = i;
             }
         }
-        System.out.println("min value = "+minValue);
-        System.out.println("max value = "+maxValue);
+        System.out.println("min value = " + minValue);
+        System.out.println("max value = " + maxValue);
         numbers[min] = 0;
         numbers[max] = 99;
         System.out.println(Arrays.toString(numbers));
+
+       /* 2. Создайте массив с 10-ю переменными типа float. Далее найдите дубликаты и выведите их количество.
+        Пример: есть массив {2, 3, 5, 7, 6, 5, 7, 3, 7, 20} - в данном массиве цифра 3 и 7 повторяются.
+        В результате выполнения программы на экран должно вывести:
+        [3] - повторений 2
+        [7] - повторений 3*/
+        System.out.println("************");
+        float[] secondArray = new float[10];
+        secondArray[0] = 7.0f;
+        secondArray[1] = 5.0f;
+        secondArray[2] = 3.0f;
+        secondArray[3] = 3.5f;
+        secondArray[4] = 9.0f;
+        secondArray[5] = 5.0f;
+        secondArray[6] = 9.0f;
+        secondArray[7] = 7.0f;
+        secondArray[8] = 5.0f;
+        secondArray[9] = 5.0f;
+
+        float duplication = secondArray[0];
+        int countOfDublication = 0;
+        boolean find=false;
+
+               for (int i = 0; i < secondArray.length; i++) {
+            if (duplication == secondArray[i]) {
+                countOfDublication++;
+            }
+        }
+        System.out.println("["+duplication+"] - повторений "+countOfDublication);
+              
 
     }
 }
