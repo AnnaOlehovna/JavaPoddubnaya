@@ -50,17 +50,26 @@ public class Main {
         secondArray[8] = 5.0f;
         secondArray[9] = 5.0f;
 
+
+        float currentComparison = secondArray[0];
         float duplication = secondArray[0];
         int countOfDublication = 0;
-        boolean find=false;
 
-               for (int i = 0; i < secondArray.length; i++) {
-            if (duplication == secondArray[i]) {
-                countOfDublication++;
+
+        for (int j = 0; j < secondArray.length; j++) {
+            duplication=secondArray[j];
+            System.out.println("значение "+duplication+"при j "+j);
+
+
+            for (int i = 0; i < secondArray.length; i++) {
+                if (duplication == secondArray[i]) {
+                    countOfDublication++;
+                    System.out.println(secondArray[i]+"   "+i+"    "+countOfDublication);
+
+                }
             }
+//            if(countOfDublication>1)
+//            System.out.println("[" + duplication + "] - повторений " + countOfDublication);
         }
-        System.out.println("["+duplication+"] - повторений "+countOfDublication);
-              
-
     }
 }
