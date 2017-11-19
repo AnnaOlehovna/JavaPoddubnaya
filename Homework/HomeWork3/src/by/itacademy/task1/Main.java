@@ -10,17 +10,19 @@ public class Main {
         int[] currentArray = getTenNumbers();
         printArray(currentArray);
 
-        int[] sortedBubble = bubbleSorting(currentArray);
-        printArray(sortedBubble);
+        printArray(bubbleSorting(currentArray));
 
-        int[] evenNumbers = findEvenNumbers(currentArray);
-        printArray(evenNumbers);
+        printArray(selectionSorting(currentArray));
 
+        printArray(insertSorting(currentArray));
+
+        printArray(findEvenNumbers(currentArray));
 
     }
 
     /**
      * Get 10 integer numbers from user
+     *
      * @return
      */
     public static int[] getTenNumbers() {
@@ -36,6 +38,7 @@ public class Main {
 
     /**
      * Prints array of integer numbers
+     *
      * @param arrayForPrinting
      */
     public static void printArray(int[] arrayForPrinting) {
@@ -51,7 +54,8 @@ public class Main {
     }
 
     /**
-     * Method for Bubble sorting of integer numbers
+     * Method for Bubble sort of integer array
+     *
      * @param arrayForSorting
      * @return
      */
@@ -69,7 +73,51 @@ public class Main {
     }
 
     /**
+     * Method for selection sort of integer array
+     *
+     * @param arrayForSorting
+     * @return
+     */
+    public static int[] selectionSorting(int[] arrayForSorting) {
+        for (int i = 0; i < arrayForSorting.length; i++) {
+            int minIndex = i;
+            for (int j = i + 1; j < arrayForSorting.length; j++) {
+                if (arrayForSorting[j] < arrayForSorting[minIndex]) {
+                    minIndex = j;
+                }
+            }
+            int temp = arrayForSorting[i];
+            arrayForSorting[i] = arrayForSorting[minIndex];
+            arrayForSorting[minIndex] = temp;
+        }
+        return arrayForSorting;
+    }
+
+    /**
+     * Method for insertion sort of integer array
+     *
+     * @param arrayForSorting
+     * @return
+     */
+    public static int[] insertSorting(int[] arrayForSorting) {
+        for (int i = 0; i < arrayForSorting.length - 1; i++) {
+            if (arrayForSorting[i] > arrayForSorting[i + 1]) {
+                int temp = arrayForSorting[i + 1];
+                arrayForSorting[i + 1] = arrayForSorting[i];
+                int j = i;
+                while (j > 0 && temp < arrayForSorting[j - 1]) {
+                    arrayForSorting[j] = arrayForSorting[j - 1];
+                    j--;
+                }
+                arrayForSorting[j] = temp;
+            }
+        }
+        return arrayForSorting;
+    }
+
+    /**
      * Creates array of even integer numbers from current array
+     *
      * @param arrayOfNumbers - current array
      * @return
      */
