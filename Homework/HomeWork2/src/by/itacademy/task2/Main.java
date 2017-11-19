@@ -8,7 +8,6 @@ public class Main {
                 В результате выполнения программы на экран должно вывести:
                 [3] - повторений 2
                 [7] - повторений 3*/
-        System.out.println("*****************");
 
         int counter = 0;
         boolean isDuplicate = false;

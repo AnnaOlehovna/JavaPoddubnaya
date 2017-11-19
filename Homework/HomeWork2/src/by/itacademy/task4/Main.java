@@ -1,13 +1,12 @@
 package by.itacademy.task4;
 
 public class Main {
-    public static void main(String[] arg){
+    public static void main(String[] arg) {
 
          /* 4. Написать программу, определяющую, образуют ли цифры некоторого числа
        строго возрастающую последовательность.
        Например: 123 – образуют, 212 – не образуют.        */
 
-        System.out.println("****************");
         int numberToCheck = 12;
         int divisionResult = numberToCheck;
         int numeralCounter = 0;
