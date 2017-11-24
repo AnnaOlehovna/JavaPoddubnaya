@@ -2,14 +2,13 @@ package by.itacademy.task1;
 
 import java.util.Scanner;
 
-
 public class Main {
     public static void main(String[] args) {
 
 
         System.out.println("Введите количество пациентов");
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        int amountOfPatient = reader;
+        Scanner scanner = new Scanner(System.in);
+        int amountOfPatient = scanner.nextInt();
         Patient[] patients = new Patient[amountOfPatient];
         for (int i = 0; i < patients.length; i++) {
             patients[i] = new Patient();
@@ -34,7 +33,6 @@ public class Main {
         return patientName;
 
     }
-
 
 
     public void goodbyeMessage() {
