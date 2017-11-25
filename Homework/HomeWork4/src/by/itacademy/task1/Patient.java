@@ -32,11 +32,11 @@ public class Patient {
     }
 
     public String isInHospitale() {
-        String answer=null;
-        if(inHospitale){
-            answer="- В больнице.";
-           }else{
-            answer="- Выписан";
+        String answer = null;
+        if (inHospitale) {
+            answer = "- В больнице.";
+        } else {
+            answer = "- Выписан";
         }
         return answer;
     }
@@ -44,5 +44,6 @@ public class Patient {
     public void setInHospitale(boolean inHospitale) {
         this.inHospitale = inHospitale;
     }
+
 
 }
