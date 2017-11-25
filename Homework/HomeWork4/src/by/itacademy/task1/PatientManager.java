@@ -91,7 +91,7 @@ public class PatientManager {
                 searchByName(patients);
                 break;
             case 2:
-                System.out.println("поиск по возрасту");
+                searchByAge(patients);
                 break;
             case 3:
                 goodbyeMessage();
