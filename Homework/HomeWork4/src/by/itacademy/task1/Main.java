@@ -10,18 +10,16 @@ public class Main {
 
 
         System.out.println("Введите количество пациентов");
-        BufferedReader bufferedReader= new BufferedReader(new InputStreamReader(System.in));
-               int amountOfPatient = bufferedReader.read();
+        int amountOfPatient = addInt();
         Patient[] patients = new Patient[amountOfPatient];
         for (int i = 0; i < patients.length; i++) {
             patients[i] = new Patient();
             System.out.println("Введите ФИО " + (i + 1) + "-го пациента");
-            String a = bufferedReader.readLine();
-            patients[i].setFullName(a);
+             patients[i].setFullName(addString());
             System.out.println("Введите возраст " + (i + 1) + "-го пациента");
-            patients[i].setAge(scanner.nextInt());
+            patients[i].setAge(addInt());
             System.out.println("Введите номер телефона " + (i + 1) + "-го пациента");
-            patients[i].setPhoneNumber(scanner.next());
+            patients[i].setPhoneNumber(addString());
         }
         for (int i = 0; i < patients.length; i++) {
             System.out.println("Пациент: " + patients[i].getFullName() + " - Возраст: " + patients[i].getAge() + " лет.");
@@ -29,24 +27,35 @@ public class Main {
 
     }
 
-    public String addString(){
+    public static String addString(){
         String inputString=null;
         try{
-           BufferedReader bebebe= new BufferedReader(new InputStreamReader(System.in));
-          inputString = bebebe.readLine();
+           BufferedReader fillInString= new BufferedReader(new InputStreamReader(System.in));
+          inputString = fillInString.readLine();
        }catch (IOException e){
 
        }
        return inputString;
     }
 
+    public static int addInt(){
+        int inputInt=0;
+        try{
+            BufferedReader fillInInt= new BufferedReader(new InputStreamReader(System.in));
+            inputInt = fillInInt.read();
+        }catch (IOException e){
+
+        }
+        return inputInt;
+    }
+
+
+
 
     public static String searchByName() {
         System.out.println("Введите ФИО пациента");
-        Scanner scanner = new Scanner(System.in);
-        String patientName = scanner.next();
+        String patientName = addString();
         return patientName;
-
     }
 
 
