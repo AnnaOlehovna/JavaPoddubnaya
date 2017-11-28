@@ -7,16 +7,16 @@ public class CashMachine {
 
     private int fiftyCounter;
 
-    private int twenryCounter;
+    private int twentyCounter;
 
 
     public CashMachine() {
     }
 
-    public CashMachine(int hundredCounter, int fiftyCounter, int twenryCounter) {
+    public CashMachine(int hundredCounter, int fiftyCounter, int twentyCounter) {
         this.hundredCounter = hundredCounter;
         this.fiftyCounter = fiftyCounter;
-        this.twenryCounter = twenryCounter;
+        this.twentyCounter = twentyCounter;
     }
 
 
@@ -38,12 +38,12 @@ public class CashMachine {
     }
 
 
-    public int getTwenryCounter() {
-        return twenryCounter;
+    public int getTwentyCounter() {
+        return twentyCounter;
     }
 
-    public void setTwenryCounter(int twenryCounter) {
-        this.twenryCounter = twenryCounter;
+    public void setTwentyCounter(int twentyCounter) {
+        this.twentyCounter = twentyCounter;
     }
 
 }
