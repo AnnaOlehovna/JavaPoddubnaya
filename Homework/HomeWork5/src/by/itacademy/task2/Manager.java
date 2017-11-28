@@ -69,12 +69,10 @@ public class Manager {
         } else {
             int remainder = money;
             int counter = 0;
-            int difference = 0;
             counter = money / 100;
             remainder = money % (counter * 100);
             countOfBanknotes[0] = counter;
-            difference = cashMachine.getHundredCounter() - counter;
-            cashMachine.setHundredCounter(difference);
+            cashMachine.setHundredCounter(cashMachine.getHundredCounter() - counter);
             counter = 0;
             if (remainder == 60 || remainder == 80) {
                 counter = remainder / 20;
