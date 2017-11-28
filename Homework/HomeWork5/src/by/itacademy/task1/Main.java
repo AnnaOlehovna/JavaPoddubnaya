@@ -1,5 +1,9 @@
 package by.itacademy.task1;
 
+import by.itacademy.task1.VacuumCleaner.VacuumCleaner;
+import by.itacademy.task1.VacuumCleaner.WaterVacuumCleaner;
+import by.itacademy.task1.WashingMachne.LGWashing;
+
 public class Main {
     public static void main(String[] args) {
 

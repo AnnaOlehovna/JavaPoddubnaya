@@ -1,4 +1,6 @@
-package by.itacademy.task1;
+package by.itacademy.task1.VacuumCleaner;
+
+import by.itacademy.task1.VacuumCleaner.VacuumCleaner;
 
 public class WaterVacuumCleaner extends VacuumCleaner {
 

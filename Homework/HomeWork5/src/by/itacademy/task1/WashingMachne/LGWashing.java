@@ -1,4 +1,4 @@
-package by.itacademy.task1;
+package by.itacademy.task1.WashingMachne;
 
 public class LGWashing extends WashingMachine {
      private String model;

@@ -1,6 +1,8 @@
-package by.itacademy.task1;
+package by.itacademy.task1.VacuumCleaner;
 
-public class VacuumCleaner extends Appliances{
+import by.itacademy.task1.Appliances;
+
+public class VacuumCleaner extends Appliances {
 
     private int numberOfNozzles;
     private String power;

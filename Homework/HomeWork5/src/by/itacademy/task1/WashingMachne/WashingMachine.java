@@ -1,4 +1,6 @@
-package by.itacademy.task1;
+package by.itacademy.task1.WashingMachne;
+
+import by.itacademy.task1.Appliances;
 
 public class WashingMachine extends Appliances {
 
