@@ -4,6 +4,10 @@ public class Manager {
 
     private CashMachine cashMachine;
 
+    public Manager(CashMachine cashMachine) {
+        this.cashMachine = cashMachine;
+    }
+
     public int sumInMachine() {
         int sum = 100 * cashMachine.getHundredCounter()
                 + 50 * cashMachine.getFiftyCounter()
@@ -24,6 +28,7 @@ public class Manager {
         counter = 0;
         if (remainder == 60 || remainder == 80) {
             counter = remainder / 20;
+            remainder=0;
             cashMachine.setTwenryCounter(cashMachine.getTwenryCounter() + counter);
         }
         if (remainder == 10 || remainder == 30) {
@@ -34,6 +39,7 @@ public class Manager {
             remainder = remainder - 50;
             cashMachine.setFiftyCounter(cashMachine.getFiftyCounter() + 1);
             counter = remainder / 20;
+            remainder=0;
             cashMachine.setTwenryCounter(cashMachine.getTwenryCounter() + counter);
         }
         if (remainder == 0)
