@@ -72,14 +72,16 @@ public class Manager {
             counter = money / 100;
             remainder = money % (counter * 100);
             countOfBanknotes[0] = counter;
+
             cashMachine.setHundredCounter(cashMachine.getHundredCounter() - counter);
             counter = 0;
-            if (remainder == 60 || remainder == 80) {
+            if (remainder == 60 || remainder == 80 || remainder == 20) {
                 counter = remainder / 20;
                 countOfBanknotes[1] = 0;
                 countOfBanknotes[2] = counter;
                 cashMachine.setTwentyCounter(cashMachine.getTwentyCounter() - counter);
             }
+
             if (remainder == 10 || remainder == 30) {
                 remainder = remainder + 100;
                 countOfBanknotes[0] = countOfBanknotes[0] - 1;
