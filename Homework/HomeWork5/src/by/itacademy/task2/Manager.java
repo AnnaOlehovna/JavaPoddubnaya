@@ -67,11 +67,19 @@ public class Manager {
     public int[] withdrawMoney(int money) {
         int[] countOfBanknotes = new int[3];
         int counter = 0;
+        int reminder=money;
         if (money > sumInMachine()) {
             countOfBanknotes = null;
         } else {
            counter= money/100;
-
+           if(counter>cashMachine.getHundredCounter()){
+               counter=cashMachine.getHundredCounter();
+               reminder=money-100*counter;
+               cashMachine.setHundredCounter(0);
+           }else {
+               reminder = money % (counter * 100);
+               cashMachine.setHundredCounter(cashMachine.getHundredCounter() - counter);
+           }
         }
         return countOfBanknotes;
     }
