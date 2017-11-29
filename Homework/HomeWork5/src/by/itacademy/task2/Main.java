@@ -9,7 +9,7 @@ public class Main {
 
         if (manager.addMoney(90)) {
             System.out.println("Successfully");
-            System.out.println(manager.sumInMachine());
+            System.out.println("New balance " +manager.sumInMachine());
         } else {
             System.out.println("You couldn't add this sum");
         }

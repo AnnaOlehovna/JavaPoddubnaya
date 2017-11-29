@@ -66,12 +66,15 @@ public class Manager {
      */
     public int[] withdrawMoney(int money) {
         int[] countOfBanknotes = new int[3];
+        int counter = 0;
         if (money > sumInMachine()) {
             countOfBanknotes = null;
         } else {
+           counter= money/100;
 
         }
         return countOfBanknotes;
     }
+
 
 }
