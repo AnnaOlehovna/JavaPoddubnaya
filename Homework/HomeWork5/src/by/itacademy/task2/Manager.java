@@ -83,7 +83,7 @@ public class Manager {
                     cashMachine.setHundredCounter(0);
                 }
                 countOfBanknotes[0] = counter;
-            } else {
+            } else if(counter!=0) {
                 remainder = money % (counter * 100);
                 if (remainder == 10 || remainder == 30) {
                     remainder = remainder + 100;
@@ -93,25 +93,23 @@ public class Manager {
                 countOfBanknotes[0] = counter;
             }
             counter = 0;
-            if (remainder == 60 || remainder == 80) {
-                countOfBanknotes[1] = 0;
-                counter = remainder / 20;
-                countOfBanknotes[2] = counter;
-                remainder = 0;
-                cashMachine.setTwentyCounter(cashMachine.getTwentyCounter() - counter);
-            } else if (remainder != 0&&remainder>=50) {
+            if (remainder != 0&&remainder>=50) {
                 counter = remainder / 50;
                 if (counter > cashMachine.getFiftyCounter()) {
-                    remainder = remainder - 50 * cashMachine.getFiftyCounter();
+                    counter = cashMachine.getFiftyCounter();
+                    remainder = remainder - 50 * counter;
                     counter = cashMachine.getFiftyCounter();
                     cashMachine.setFiftyCounter(0);
                 } else {
                     remainder = remainder % (counter * 50);
                     cashMachine.setFiftyCounter(cashMachine.getFiftyCounter() - counter);
-
+                }
+                if(remainder==10||remainder==30){
+                    remainder=remainder+50;
+                    counter--;
+                    cashMachine.setFiftyCounter(cashMachine.getFiftyCounter() +1);
                 }
                 countOfBanknotes[1] = counter;
-
             }
             counter = 0;
             if (remainder != 0) {

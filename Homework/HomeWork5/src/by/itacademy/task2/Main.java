@@ -3,7 +3,7 @@ package by.itacademy.task2;
 public class Main {
     public static void main(String[] args) {
 
-        CashMachine cashMachine = new CashMachine(0, 0, 10);
+        CashMachine cashMachine = new CashMachine(1, 2, 10);
         Manager manager = new Manager(cashMachine);
         System.out.println(manager.sumInMachine());
 
@@ -14,7 +14,7 @@ public class Main {
             System.out.println("You couldn't add this sum");
         }
 
-        int[] array = manager.withdrawMoney(200);
+        int[] array = manager.withdrawMoney(70);
         if (array == null) {
             System.out.println("Not enough banknotes in the cash machine");
         } else {
