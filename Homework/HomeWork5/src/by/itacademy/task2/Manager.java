@@ -67,22 +67,74 @@ public class Manager {
     public int[] withdrawMoney(int money) {
         int[] countOfBanknotes = new int[3];
         int counter = 0;
-        int reminder=money;
-        if (money > sumInMachine()) {
+        int remainder = money;
+        if (money > sumInMachine() || money == 10 || money == 30) {
             countOfBanknotes = null;
         } else {
-           counter= money/100;
-           if(counter>cashMachine.getHundredCounter()){
-               counter=cashMachine.getHundredCounter();
-               reminder=money-100*counter;
-               cashMachine.setHundredCounter(0);
-           }else {
-               reminder = money % (counter * 100);
-               cashMachine.setHundredCounter(cashMachine.getHundredCounter() - counter);
-           }
+            counter = money / 100;
+            if (counter > cashMachine.getHundredCounter()) {
+                remainder = money - 100 * cashMachine.getHundredCounter();
+                if (remainder == 10 || remainder == 30) {
+                    remainder = remainder + 100;
+                    counter--;
+                    cashMachine.setHundredCounter(cashMachine.getHundredCounter() - counter);
+                } else {
+                    counter = cashMachine.getHundredCounter();
+                    cashMachine.setHundredCounter(0);
+                }
+                countOfBanknotes[0] = counter;
+            } else {
+                remainder = money % (counter * 100);
+                if (remainder == 10 || remainder == 30) {
+                    remainder = remainder + 100;
+                    counter--;
+                }
+                cashMachine.setHundredCounter(cashMachine.getHundredCounter() - counter);
+                countOfBanknotes[0] = counter;
+            }
+            counter = 0;
+            if (remainder == 60 || remainder == 80) {
+                countOfBanknotes[1] = 0;
+                counter = remainder / 20;
+                countOfBanknotes[2] = counter;
+                remainder = 0;
+                cashMachine.setTwentyCounter(cashMachine.getTwentyCounter() - counter);
+            } else if (remainder != 0&&remainder>=50) {
+                counter = remainder / 50;
+                if (counter > cashMachine.getFiftyCounter()) {
+                    remainder = remainder - 50 * cashMachine.getFiftyCounter();
+                    counter = cashMachine.getFiftyCounter();
+                    cashMachine.setFiftyCounter(0);
+                } else {
+                    remainder = remainder % (counter * 50);
+                    cashMachine.setFiftyCounter(cashMachine.getFiftyCounter() - counter);
+
+                }
+                countOfBanknotes[1] = counter;
+
+            }
+            counter = 0;
+            if (remainder != 0) {
+                counter = remainder / 20;
+                if (counter > cashMachine.getTwentyCounter()) {
+                    counter = cashMachine.getTwentyCounter();
+                    remainder = remainder - 20 * counter;
+                    cashMachine.setTwentyCounter(0);
+                    countOfBanknotes[2] = counter;
+                } else if(counter!=0){
+                    remainder = remainder % (counter * 20);
+                    cashMachine.setTwentyCounter(cashMachine.getTwentyCounter() - counter);
+                    countOfBanknotes[2] = counter;
+                }
+            } else {
+                countOfBanknotes[2] = 0;
+            }
+        }
+
+        if (remainder != 0) {
+            countOfBanknotes = null;
         }
         return countOfBanknotes;
     }
-
 
 }
