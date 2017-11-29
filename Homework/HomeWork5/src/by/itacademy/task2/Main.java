@@ -7,18 +7,18 @@ public class Main {
         Manager manager = new Manager(cashMachine);
         System.out.println(manager.sumInMachine());
 
-        if (manager.addMoney(210)) {
+        if (manager.addMoney(90)) {
             System.out.println("Successfully");
             System.out.println(manager.sumInMachine());
         } else {
-            System.out.println("Error");
+            System.out.println("You couldn't add this sum");
         }
 
-        int[] array = manager.withdrawMoney(130);
-        if (array == null) {
-            System.out.println("Not enough money");
-        } else {
-            System.out.printf("Withdrawal was successful.%n100 - " + array[0] + "%n50 - " + array[1] + "%n20 - " + array[2]+"%n");
-        }
+//        int[] array = manager.withdrawMoney(130);
+//        if (array == null) {
+//            System.out.println("Not enough money");
+//        } else {
+//            System.out.printf("Withdrawal was successful.%n100 - " + array[0] + "%n50 - " + array[1] + "%n20 - " + array[2]+"%n");
+//        }
     }
 }
