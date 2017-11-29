@@ -36,22 +36,18 @@ public class Manager {
                 remainder = addSum % (counter * 100);
                 cashMachine.setHundredCounter(cashMachine.getHundredCounter() + counter);
                 counter = 0;
-            } else if (remainder == 60 || remainder == 80) {
-                counter = remainder / 20;
-                remainder = 0;
-                cashMachine.setTwentyCounter(cashMachine.getTwentyCounter() + counter);
-            }
-            if (remainder == 10 || remainder == 30) {
+            } else if (remainder == 10 || remainder == 30) {
                 remainder = remainder + 100;
                 cashMachine.setHundredCounter(cashMachine.getHundredCounter() - 1);
-            }
-            if (remainder >= 50) {
+            } else if (remainder == 50||remainder==70||remainder==90) {
                 remainder = remainder - 50;
                 cashMachine.setFiftyCounter(cashMachine.getFiftyCounter() + 1);
+            } else if (remainder !=0) {
                 counter = remainder / 20;
                 remainder = 0;
                 cashMachine.setTwentyCounter(cashMachine.getTwentyCounter() + counter);
             }
+
             if (remainder == 0)
                 isSucceed = true;
         }

@@ -3,11 +3,11 @@ package by.itacademy.task2;
 public class Main {
     public static void main(String[] args) {
 
-        CashMachine cashMachine = new CashMachine(1, 2, 10);
+        CashMachine cashMachine = new CashMachine(1, 0, 10);
         Manager manager = new Manager(cashMachine);
         System.out.println(manager.sumInMachine());
 
-        if (manager.addMoney(90)) {
+        if (manager.addMoney(20)) {
             System.out.println("Successfully");
             System.out.println("New balance " +manager.sumInMachine());
         } else {
