@@ -36,7 +36,8 @@ public class Manager {
                 remainder = addSum % (counter * 100);
                 cashMachine.setHundredCounter(cashMachine.getHundredCounter() + counter);
                 counter = 0;
-            } else if (remainder == 10 || remainder == 30) {
+            }
+            if (remainder == 10 || remainder == 30) {
                 remainder = remainder + 100;
                 cashMachine.setHundredCounter(cashMachine.getHundredCounter() - 1);
             } else if (remainder == 50||remainder==70||remainder==90) {
