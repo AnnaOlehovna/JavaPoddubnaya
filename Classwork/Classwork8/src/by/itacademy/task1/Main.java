@@ -19,7 +19,7 @@ public class Main {
 
             int a =5/0;
 
-             
+
             SimpleDateFormat sdf = new SimpleDateFormat("");
             Date date = sdf.parse("qwe");
 //
