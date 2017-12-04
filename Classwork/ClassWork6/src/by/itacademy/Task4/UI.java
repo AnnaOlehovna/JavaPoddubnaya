@@ -1,15 +1,13 @@
-package by.itacademy.Lesson6.Task4;
+package by.itacademy.task4;
 
 /**
- * Created by daryatratseuskaya on 11/27/17
+ * Created by user on 27.11.2017.
  */
-public class UI {
+public class UI implements ButtonClick{
 
-
+    @Override
     public void onClick(){
-        // на кнопку нажали
-
-        System.out.println("Click");
+        //нажали на кнопку
+        System.out.println("click!");
     }
-
 }

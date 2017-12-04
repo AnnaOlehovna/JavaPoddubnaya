@@ -1,4 +1,7 @@
-package by.itacademy.task1;
+package by.itacademy.task1.CashMachines;
+
+import by.itacademy.task1.Interfaces.Deposit;
+import by.itacademy.task1.Interfaces.Withdrawal;
 
 public abstract class BasicCashMashine implements Deposit, Withdrawal {
 
@@ -7,6 +10,8 @@ public abstract class BasicCashMashine implements Deposit, Withdrawal {
     private int hundredCounter;
     private int fiftyCounter;
     private int twentyCounter;
+
+
 
     public BasicCashMashine(String manufacture, String bankName, int hundredCounter, int fiftyCounter, int twentyCounter) {
         this.manufacture = manufacture;
@@ -81,7 +86,8 @@ public abstract class BasicCashMashine implements Deposit, Withdrawal {
             } else if (remainder == 50 || remainder == 70 || remainder == 90) {
                 remainder = remainder - 50;
                 fiftyCounter = fiftyCounter + 1;
-            } else if (remainder != 0) {
+            }
+            if (remainder != 0) {
                 counter = remainder / 20;
                 remainder = 0;
                 twentyCounter = twentyCounter + counter;

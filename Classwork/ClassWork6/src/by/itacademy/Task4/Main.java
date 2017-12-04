@@ -1,37 +1,27 @@
-package by.itacademy.Lesson6.Task4;
+package by.itacademy.task4;
 
 /**
- * Created by daryatratseuskaya on 11/27/17
+ * Created by user on 27.11.2017.
  */
 public class Main {
-
     public static void main(String[] args) {
+//Создаем нужные элементы
 
-        //создаем нужные элементы
-        UI main = new UI(); // допустим в UI лежит логика работы с пользователем
-        Button button = new Button(); // создали кнопку
-        button.setMain(main); // закинули ссылку на UI в Button
+        UI ui = new UI();// допусти в UI лежит логика работы с пользователем
+        Button button = new Button();//создали кнопку
+        button.setBtClick(ui);// скинули ссылку на UI в Button
 
+        UI2 ui2 = new UI2();
+        Button button2 = new Button();
+        button2.setBtClick(ui2);
 
-//        UI2 ui2 = new UI(); // допустим в UI лежит логика работы с пользователем
-//        Button button2 = new Button(); // создали кнопку
-//        button.setMain(ui2); // закинули ссылку на UI в Button
+        //зависли на три сек
+       try {
+           Thread.sleep(3000);
+       }catch (InterruptedException e){}
 
-
-        //зависли на 3 секунды
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {}
-
-        // симулируем нажатие на кнопку
-        // в реальности этого тут не будет
-        button.emulateClickOnButton();
-
-
-
-
-
-
+       //симулируем нажатие на кнопку,  в реальности такого не будет
+       button.emulateClickButton();
     }
 
-  }
+}

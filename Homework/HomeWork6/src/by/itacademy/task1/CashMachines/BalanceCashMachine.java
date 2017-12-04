@@ -1,9 +1,11 @@
-package by.itacademy.task1;
+package by.itacademy.task1.CashMachines;
 
-public class SimpleCashMachine extends BasicCashMashine implements NumberOfBanknots{
+import by.itacademy.task1.Interfaces.NumberOfBanknots;
+
+public class BalanceCashMachine extends BasicCashMashine implements NumberOfBanknots {
 
 
-    public SimpleCashMachine(String manufacture, String bankName, int hundredCounter, int fiftyCounter, int twentyCounter) {
+    public BalanceCashMachine(String manufacture, String bankName, int hundredCounter, int fiftyCounter, int twentyCounter) {
         super(manufacture, bankName, hundredCounter, fiftyCounter, twentyCounter);
     }
 
@@ -17,4 +19,3 @@ public class SimpleCashMachine extends BasicCashMashine implements NumberOfBankn
         return array;
     }
 }
-

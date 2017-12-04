@@ -1,22 +1,21 @@
-package by.itacademy.Lesson6.Task4;
+package by.itacademy.task4;
 
 /**
- * Created by daryatratseuskaya on 11/27/17
+ * Created by user on 27.11.2017.
  */
 public class Button {
 
-    private UI ui;
-
-    // записываем в Button ссылку на Main
-    // чтобы Button мог вызвать методы у Main
-    public void setMain(UI ui) {
-        this.ui = ui;
+    private ButtonClick btClick;
+//записываем в Button ссылку на UI, чтобы Button мог вызвать UI
+    public void setBtClick(ButtonClick btClick) {
+        this.btClick = btClick;
     }
 
-    // симулируем нажатие на кнопку, это чисто тестовый метод
-    // в реальности он приватный
-    public void emulateClickOnButton(){
-        if (ui != null) ui.onClick();
 
+    // симулирует нажатие на кнопку, это чисто тестовый метод
+    public void emulateClickButton(){
+        if(btClick != null){
+            btClick.onClick();
+        }
     }
 }
