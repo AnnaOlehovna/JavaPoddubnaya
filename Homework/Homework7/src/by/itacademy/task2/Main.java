@@ -7,37 +7,9 @@ import java.io.InputStreamReader;
 public class Main {
     public static void main(String[] args) {
 
-        Manager manager= new Manager();
-        Manager[] stud = new Manager[2];
+        Student[] stud = addStudents();
+        Manager manager= new Manager(stud);
         printAverageAge(manager.averageAge(stud));
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     }
 
@@ -52,6 +24,7 @@ public class Main {
         }
         return inputString;
     }
+
 
     public static int addInt() {
         int inputInt = 0;
@@ -87,7 +60,24 @@ public class Main {
     }
 
     private static void printAverageAge(int[] yearMonth){
-        System.out.println("Средний возраст студентов: "+yearMonth[0]+" лет "+yearMonth[1]+" месяцев.");
+       String s1=null;
+       String s2=null;
+        if(yearMonth[0]%10==1){
+            s1 = "Средний возраст студентов: "+yearMonth[0]+" год ";
+        }else if(yearMonth[0]%10==2||yearMonth[0]%10==3||yearMonth[0]%10==4){
+            s1= "Средний возраст студентов: "+yearMonth[0]+" года ";
+        }else{
+            s1="Средний возраст студентов: "+yearMonth[0]+" лет ";
+        }
+        if(yearMonth[1]==0){
+            s2="";
+        }else if(yearMonth[1]==2||yearMonth[1]==3||yearMonth[1]==4){
+            s2= yearMonth[1]+" месяца.";
+        }else{
+            s2=yearMonth[1]+ " месяцев.";
+        }
+        System.out.println(s1+s2);
+
     }
 
 
