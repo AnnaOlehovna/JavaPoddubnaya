@@ -1,9 +1,6 @@
 package by.itacademy.task1;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -68,6 +65,13 @@ public class Main {
         Student student2= new Student("Name",25);
 
         System.out.println(student2.toString());
+
+
+        Collections.sort(array);
+
+        //with comparator -  полиморфизм
+        Comparator sortByAge = new SortByAge();
+        Collections.sort(array,sortByAge);
 
 
 

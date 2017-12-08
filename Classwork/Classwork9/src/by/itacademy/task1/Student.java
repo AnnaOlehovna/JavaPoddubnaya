@@ -3,7 +3,7 @@ package by.itacademy.task1;
 /**
  * Created by user on 08.12.2017.
  */
-public class Student {
+public class Student implements Comparable<Student>{
     private String name;
     private int age;
 
@@ -61,5 +61,25 @@ public class Student {
                 "name='" + name + '\'' +
                 ", age=" + age +
                 '}';
+    }
+
+
+    // если надо отсортировать объекты, нужно переопределить compareTo и если сортировка одного типа,
+    // только по возрасту или только по имени или только по обоим
+    // если сравнить только по имени
+//    @Override
+//    public int compareTo(Student o) {
+//        return this.name.compareTo(o.getName());
+//    }
+
+   //если сравнение  по возрасту
+    @Override
+    public int compareTo(Student o) {
+        if(this.age==o.age
+                //this.name.compareTo(o.getName()) - это если и имя, и возраст нужно сравнивать
+                && this.name.compareTo(o.getName())==0) return 0;
+        if(this.age>o.age) return 1;
+        return -1;
+
     }
 }
