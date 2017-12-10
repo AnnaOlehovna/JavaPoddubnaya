@@ -40,16 +40,5 @@ public class Student {
         this.birthDay = birthDay;
     }
 
-    //    public boolean setBirthDay(String inputString) {
-//        boolean isRight = true;
-//        Date birthday = new Date();
-//        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.forLanguageTag("ru"));
-//        try {
-//            birthday=sdf.parse("11-12-1992");
-//        } catch (ParseException e) {
-//            isRight=false;
-//        }
-//        this.birthDay = birthDay;
-//        return isRight;
-//    }
+
 }
