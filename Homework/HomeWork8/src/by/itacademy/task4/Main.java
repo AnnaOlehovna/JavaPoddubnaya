@@ -7,17 +7,24 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) throws IOException {
 
-       Manager manager=new Manager();
-       Student[] students = createStudents();
-       printStud(students);
-       manager.averageAge(students);
-       printAverageAge(manager.averageAge(students));
+        Manager manager = new Manager();
+        Student[] students = createStudents();
+        printStud(students);
+        manager.averageAge(students);
+        printAverageAge(manager.averageAge(students));
 
     }
 
+    /**
+     * Проверяет наличие текстового файла students.txt
+     * При наличии считывает данные в массив Student[]
+     * При отсутствии данные вводятся с консоли, заполняется массив Student[] и создается файл students.txt
+     *
+     * @return - тип Student[] - массив Student
+     */
     private static Student[] createStudents() {
         Manager manager = new Manager();
-        Student[] stud=null;
+        Student[] stud = null;
         String path = new File("").getAbsolutePath();
         File studentsFile = new File(path + "\\students.txt");
         if (studentsFile.exists()) {
@@ -84,6 +91,11 @@ public class Main {
         return stud;
     }
 
+    /**
+     * Считывает строку с консоли
+     *
+     * @return String
+     */
     private static String addString() {
         String inputString = null;
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
@@ -96,6 +108,11 @@ public class Main {
     }
 
 
+    /**
+     * Считывает целое число с консоли
+     *
+     * @return int
+     */
     private static int addInt() {
         int inputInt = 0;
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
@@ -107,6 +124,11 @@ public class Main {
         return inputInt;
     }
 
+    /**
+     * Печатает в консоль массив Student[]
+     *
+     * @param students - тип Student[]
+     */
     private static void printStud(Student[] students) {
         for (int i = 0; i < students.length; i++) {
             SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -114,6 +136,11 @@ public class Main {
         }
     }
 
+    /**
+     * Печатает в консоль средний возраст студентов
+     *
+     * @param yearMonth - тип int[]
+     */
     private static void printAverageAge(int[] yearMonth) {
         String s1 = null;
         String s2 = null;
