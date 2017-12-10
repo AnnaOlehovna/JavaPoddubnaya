@@ -3,12 +3,14 @@ package by.itacademy.task2;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
 
 public class Main {
     public static void main(String[] args) {
 
         Student[] stud = addStudents();
         Manager manager= new Manager(stud);
+        printStud(stud);
         printAverageAge(manager.averageAge(stud));
 
     }
@@ -55,7 +57,8 @@ public class Main {
 
     public static void printStud(Student[] students){
         for(int i =0; i<students.length;i++){
-            System.out.println(students[0].getSurName()+" "+ students[0].getName()+" "+ students[0].getBirthDay());
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+            System.out.println(students[i].getSurName()+" "+ students[i].getName()+" "+ sdf.format(students[i].getBirthDay()));
         }
     }
 
