@@ -16,7 +16,13 @@ public class Manager  {
         this.students = students;
     }
 
-    public  Date stringToDate(String stringBirthday) {
+  /**
+   * Переводит String с датой рожения в тип Date
+   *
+   * @param stringBirthday - тип String
+   * @return - тип Date
+   */
+   public  Date stringToDate(String stringBirthday) {
         Date birthday = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         try {
@@ -27,6 +33,12 @@ public class Manager  {
         return birthday;
     }
 
+    /**
+     * Рассчитывает средний возраст студентов по дате рождения
+     *
+     * @param students - тип Student[]
+     * @return - int[] - средний возраст в годах и месяцах
+     */
     public int[] averageAge(Student[] students) {
         int[] diffYearMonth = new int[2];
         GregorianCalendar nowadays = new GregorianCalendar();

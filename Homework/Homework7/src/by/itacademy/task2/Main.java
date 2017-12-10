@@ -15,7 +15,11 @@ public class Main {
 
     }
 
-
+    /**
+     Считывает строку с консоли
+     *
+     * @return String
+     */
     public static String addString() {
         String inputString = null;
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
@@ -27,7 +31,11 @@ public class Main {
         return inputString;
     }
 
-
+    /**
+     * Считывает целое число с консоли
+     *
+     * @return int
+     */
     public static int addInt() {
         int inputInt = 0;
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
@@ -39,6 +47,10 @@ public class Main {
         return inputInt;
     }
 
+    /**
+     *
+     * @return
+     */
     public static Student[] addStudents() {
         Manager manager= new Manager();
         System.out.println("Введите число студентов");
@@ -55,6 +67,11 @@ public class Main {
         return students;
     }
 
+    /**
+     * Печатает в консоль массив Student[]
+     *
+     * @param students - тип Student[]
+     */
     public static void printStud(Student[] students){
         for(int i =0; i<students.length;i++){
             SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -62,6 +79,11 @@ public class Main {
         }
     }
 
+    /**
+     * Печатает в консоль средний возраст студентов
+     *
+     * @param yearMonth - тип int[] - год и месяц
+     */
     private static void printAverageAge(int[] yearMonth){
        String s1=null;
        String s2=null;
