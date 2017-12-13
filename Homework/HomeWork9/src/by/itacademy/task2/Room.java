@@ -3,19 +3,28 @@ package by.itacademy.task2;
 import java.util.ArrayList;
 
 public class Room implements LightInRoom,BusySquare{
+
+    private static final int maxPercent= 70;
+
     private String roomName;
-    private double squareRoom;
-    private double minBusySquare;
-    private double maxBusySquare;
+    private double roomSq;
+    private double busySq;
     private int windows;
-    private ArrayList<Bulb> bulb;
-    private ArrayList<Furniture> furniture;
+    private ArrayList<Lamp> lampList = new ArrayList<>();
+    private ArrayList<Furniture> furnitureList = new ArrayList<>();
     private int light;
 
-    public Room(String roomName, double square, int windows) {
+    public Room() {
+    }
+
+    public Room(String roomName, double roomSq, int windows) {
         this.roomName = roomName;
-        this.squareRoom = square;
+        this.roomSq = roomSq;
         this.windows = windows;
+    }
+
+    public static int getMaxPercent() {
+        return maxPercent;
     }
 
     public String getRoomName() {
@@ -26,12 +35,16 @@ public class Room implements LightInRoom,BusySquare{
         this.roomName = roomName;
     }
 
-    public double getSquare() {
-        return squareRoom;
+    public double getRoomSq() {
+        return roomSq;
     }
 
-    public void setSquare(double square) {
-        this.squareRoom = square;
+    public void setRoomSq(double roomSq) {
+        this.roomSq = roomSq;
+    }
+
+    public double getBusySq() {
+        return calculateBusySq();
     }
 
     public int getWindows() {
@@ -42,76 +55,95 @@ public class Room implements LightInRoom,BusySquare{
         this.windows = windows;
     }
 
-    public ArrayList<Bulb> getBulb() {
-        return bulb;
+    public ArrayList<Lamp> getLampList() {
+        return lampList;
     }
 
-    public void setBulb(ArrayList<Bulb> bulb) {
-        this.bulb = bulb;
+    public void setLampList(ArrayList<Lamp> lampList) {
+        this.lampList = lampList;
     }
 
-    public ArrayList<Furniture> getFurniture() {
-        return furniture;
+    public ArrayList<Furniture> getFurnitureList() {
+        return furnitureList;
     }
 
-    public void setFurniture(ArrayList<Furniture> furniture) {
-        this.furniture = furniture;
+    public void setFurnitureList(ArrayList<Furniture> furnitureList) {
+        this.furnitureList = furnitureList;
     }
 
     public int getLight() {
-        return light;
-    }
-    public void setLight(int light) {
-        this.light = light;
-
+        return calculateLight();
     }
 
 
-    public double getMaxBusySquare() {
-        return maxBusySquare;
-    }
 
-    public void setMaxBusySquare(double maxBusySquare) {
-        this.maxBusySquare = maxBusySquare;
-    }
-
-    public double getMinBusySquare() {
-        return minBusySquare;
-    }
-
-    public void setMinBusySquare(double minBusySquare) {
-        this.minBusySquare = minBusySquare;
-    }
-
-    public void add(Bulb bulb)throws IlluminanceTooMuchException{
-        if(getLight()+bulb.getPower()>4000){
+    public void add(Lamp lamp)throws IlluminanceTooMuchException{
+        if(getLight()+ lamp.getPower()>4000){
             throw new IlluminanceTooMuchException();
+        }else{
+            lampList.add(lamp);
         }
     }
 
     public void add(Furniture furniture) throws SpaceUsageTooMuchException{
-
-
+        if(getBusySq()+furniture.getSize()>maxPercent*roomSq/100){
+            throw new SpaceUsageTooMuchException();
+        }else{
+            furnitureList.add(furniture);
+        }
     }
 
 
 
     @Override
     public int calculateLight() {
-     int bulbLight = 0;
-      for(int i = 0;i<bulb.size();i++){
-          bulbLight=+bulb.get(i).getPower();
+     int lampLight = 0;
+      for(int i = 0; i< lampList.size(); i++){
+          lampLight=lampLight+lampList.get(i).getPower();
       }
-        light= getWindows()* 700 + bulbLight;
+        light= getWindows()* 700 + lampLight;
         return light;
     }
 
     @Override
-    public double calculateMaxBusySquare() {
-        for(int i=0; i<furniture.size();i++){
-            maxBusySquare =+ furniture.get(i).getMaxSize();
+    public double calculateBusySq() {
+        for(int i = 0; i<furnitureList.size();i++){
+            busySq=busySq+furnitureList.get(i).getSize();
         }
-        return maxBusySquare;
+        return busySq;
+    }
+
+    public double calculateFreeSq() {
+        double freeSq = roomSq-busySq;
+        return freeSq;
+    }
+
+
+    public void describeLight(){
+        if(lampList.size()==0){
+            System.out.printf("нет\r\n");
+        }else{
+
+        for(int i=0; i<lampList.size();i++){
+            System.out.printf(lampList.get(i).getPower()+" ЛК");
+            if(i==lampList.size()-1){
+                System.out.printf(")\r\n");
+            }else{
+                System.out.printf(", ");
+            }
+        }
+        }
+    }
+
+    public void describeFurniture(){
+        if(furnitureList.size()==0){
+            System.out.printf("нет");
+        }else{
+        for(int i=0; i<furnitureList.size();i++){
+
+            System.out.println(furnitureList.get(i).getName()+" (площадь "+furnitureList.get(i).getSize()+" м.кв.)");
+        }
+        }
     }
 
 

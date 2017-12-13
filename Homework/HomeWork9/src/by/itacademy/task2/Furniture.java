@@ -2,18 +2,11 @@ package by.itacademy.task2;
 
 public class Furniture {
     private String name;
-    private double minSize;
-    private double maxSize;
+     private double size;
 
-    public Furniture(String name, double minSize, double maxSize) {
+    public Furniture(String name, double size) {
         this.name = name;
-        this.minSize = minSize;
-        this.maxSize = maxSize;
-    }
-
-    public Furniture(String name, double maxSize) {
-        this.name = name;
-        this.maxSize = maxSize;
+        this.size = size;
     }
 
     public String getName() {
@@ -24,19 +17,11 @@ public class Furniture {
         this.name = name;
     }
 
-    public double getMinSize() {
-        return minSize;
+    public double getSize() {
+        return size;
     }
 
-    public void setMinSize(double minSize) {
-        this.minSize = minSize;
-    }
-
-    public double getMaxSize() {
-        return maxSize;
-    }
-
-    public void setMaxSize(double maxSize) {
-        this.maxSize = maxSize;
+    public void setSize(double size) {
+        this.size = size;
     }
 }
