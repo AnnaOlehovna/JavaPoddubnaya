@@ -121,7 +121,7 @@ public class Room implements LightInRoom,BusySquare{
 
     public void describeLight(){
         if(lampList.size()==0){
-            System.out.printf("нет\r\n");
+            System.out.printf("- нет)\r\n");
         }else{
 
         for(int i=0; i<lampList.size();i++){
