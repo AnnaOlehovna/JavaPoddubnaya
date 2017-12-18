@@ -9,7 +9,7 @@ import java.util.List;
 public class Root {
     private String name;
     private List<People> people;
-   // private Gender gender;
+    private Gender gender;
     private Date date;
 
     public String getName() {
@@ -51,6 +51,7 @@ public class Root {
         return "Root{" +
                 "name='" + name + '\'' +
                 ", people=" + people +
+                ", gender=" + gender +
                 ", date=" + date +
                 '}';
     }
