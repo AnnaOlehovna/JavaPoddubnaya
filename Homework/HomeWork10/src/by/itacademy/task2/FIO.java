@@ -35,4 +35,9 @@ public class FIO {
     public void setFatherName(String fatherName) {
         this.fatherName = fatherName;
     }
+
+    @Override
+    public String toString() {
+        return  surmane +" "+  name+" "+ fatherName;
+    }
 }
