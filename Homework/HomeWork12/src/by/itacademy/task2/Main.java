@@ -1,7 +1,6 @@
 package by.itacademy.task2;
 
 import by.itacademy.task2.Entity.Root;
-import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -15,12 +14,10 @@ public class Main {
         try {
             Root root = mapper.readValue(new URL("http://kiparo.ru/t/test.json"), Root.class);
             System.out.println(root.toString());
-        } catch (JsonGenerationException ex) {
-            ex.printStackTrace();
-        } catch (JsonMappingException ex) {
-            ex.printStackTrace();
-        } catch (IOException ex) {
-            ex.printStackTrace();
+        } catch (JsonMappingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
