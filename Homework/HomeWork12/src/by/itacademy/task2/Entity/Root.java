@@ -1,12 +1,16 @@
 package by.itacademy.task2.Entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 import java.util.Date;
 import java.util.List;
 
 public class Root {
     private String name;
     private List<People> people;
+    @JsonDeserialize(as = Gender.class)
     private Gender gender;
+    @JsonDeserialize(as = Date.class)
     private Date date;
 
     public String getName() {

@@ -1,18 +1,23 @@
 package by.itacademy.task2.Entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 public class People {
     private int id;
 
-
-    private String name;
+    @JsonProperty("name")
+    private String firstName;
 
     private String surname;
     private int age;
+
+    @JsonDeserialize(as = boolean.class)
     private boolean isDegree;
 
     public People(int id, String name, String surname, int age, boolean isDegree) {
         this.id = id;
-        this.name = name;
+        this.firstName = name;
         this.surname = surname;
         this.age = age;
         this.isDegree = isDegree;
@@ -29,12 +34,12 @@ public class People {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getSurname() {
@@ -71,14 +76,14 @@ public class People {
         if (id != people.id) return false;
         if (age != people.age) return false;
         if (isDegree != people.isDegree) return false;
-        if (name != null ? !name.equals(people.name) : people.name != null) return false;
+        if (firstName != null ? !firstName.equals(people.firstName) : people.firstName != null) return false;
         return surname != null ? surname.equals(people.surname) : people.surname == null;
     }
 
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
         result = 31 * result + (surname != null ? surname.hashCode() : 0);
         result = 31 * result + age;
         result = 31 * result + (isDegree ? 1 : 0);
@@ -89,7 +94,7 @@ public class People {
     public String toString() {
         return "People{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", firstName='" + firstName + '\'' +
                 ", surname='" + surname + '\'' +
                 ", age=" + age +
                 ", isDegree=" + isDegree +
