@@ -63,19 +63,18 @@ public class Main {
         }
        */
 
-     //   thread3.start();
+        //   thread3.start();
         thread4.start();
 
 
         try {
-            Thread.sleep(1000);
+            Thread.sleep(1000);//усыпляем главный поток
         } catch (InterruptedException e) {
-            e.printStackTrace();
         }
 
-     //   thread3.stop();//рабочий, но плохой способ
+        //   thread3.stop();//рабочий, но плохой способ
 
-   //     thread3.setFinish(true);//остановка не сразу, а через какое-то время, но ждет пока выполнится sleep() в Thread3
+        //     thread3.setFinish(true);//остановка не сразу, а через какое-то время, но ждет пока выполнится sleep() в Thread3
 
         thread4.interrupt();
 
@@ -85,6 +84,17 @@ public class Main {
     }
 
     public static void test() {
+        //bla-bla
+    }
+
+
+    //synchronized - модификатор, который дает доступ к этому методу в данный метод только одному потоку
+    //если один поток уже вызвал этот метод, то второй стоит в очереди и ждет, когда первый поток закончит использовать метод
+    public synchronized static void openFile() {
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+        }
 
     }
 }
