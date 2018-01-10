@@ -18,13 +18,14 @@ public class Main {
 
         File folder = new File(args[0]);
         File[] files = folder.listFiles();
-        int numberOfFiles = files.length;
+        //new Mp3CheckSum().Mp3CheckSum(files);
+
+
 
         ArrayList<Mp3File> mp3List = new ArrayList<>();
-        for (int i = 0; i < numberOfFiles; i++) {
+        for (int i = 0; i < files.length; i++) {
             try {
                 mp3List.add(new Mp3File(files[i].getAbsolutePath()));
-
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (UnsupportedTagException e) {
@@ -33,68 +34,15 @@ public class Main {
                 e.printStackTrace();
             }
         }
+        HashMap<String,ArrayList<String>> artistAlbum = new HashMap<>();
+        for (Mp3File mp3File:mp3List){
+            System.out.println(mp3File.getId3v2Tag().getArtist());
 
 
-
-
-
-
-        //проверка на дубликаты по контрольной сумме
-
-        HashMap<String,ArrayList<String>> checkSumMap = new HashMap<>();
-        for (int i = 0; i < numberOfFiles; i++) {
-            try {
-                if(checkSumMap.containsKey(getMD5Checksum(files[i]))) {
-                    checkSumMap.get(getMD5Checksum(files[i])).add(files[i].getAbsolutePath());
-                }else {
-                    ArrayList<String> filePathList= new ArrayList<>();
-                checkSumMap.put(getMD5Checksum(files[i]), filePathList);
-                filePathList.add(files[i].getAbsolutePath());
-                }
-            } catch (Exception e) {  }
-        }
-
-        for () {
-            if(checkSumMap.)
-
-        }
-
-
-
-
-    }
-
-
-
-
-    public static byte[] createChecksum(File filename) throws Exception {
-        InputStream fis =  new FileInputStream(filename);
-
-        byte[] buffer = new byte[1024];
-        MessageDigest complete = MessageDigest.getInstance("MD5");
-        int numRead;
-
-        do {
-            numRead = fis.read(buffer);
-            if (numRead > 0) {
-                complete.update(buffer, 0, numRead);
             }
-        } while (numRead != -1);
-
-        fis.close();
-        return complete.digest();
-    }
-
-
-
-    public static String getMD5Checksum(File filename) throws Exception {
-        byte[] b = createChecksum(filename);
-        String result = "";
-
-        for (int i=0; i < b.length; i++) {
-            result += Integer.toString( ( b[i] & 0xff ) + 0x100, 16).substring( 1 );
         }
-        return result;
-    }
 
-   }
+}
+
+
+
