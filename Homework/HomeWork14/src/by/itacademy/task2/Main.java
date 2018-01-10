@@ -4,21 +4,26 @@ import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.security.MessageDigest;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
 
+        File folder = new File(args[0]);
+        File[] files = folder.listFiles();
+        int numberOfFiles = files.length;
+
         ArrayList<Mp3File> mp3List = new ArrayList<>();
-
-
-        for (int i = 0; i < args.length; i++) {
+        for (int i = 0; i < numberOfFiles; i++) {
             try {
-                Mp3File mp3File = new Mp3File(args[i]);
-                mp3List.add(mp3File);
-
-
+                mp3List.add(new Mp3File(files[i].getAbsolutePath()));
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -30,5 +35,66 @@ public class Main {
         }
 
 
+
+
+
+
+        //проверка на дубликаты по контрольной сумме
+
+        HashMap<String,ArrayList<String>> checkSumMap = new HashMap<>();
+        for (int i = 0; i < numberOfFiles; i++) {
+            try {
+                if(checkSumMap.containsKey(getMD5Checksum(files[i]))) {
+                    checkSumMap.get(getMD5Checksum(files[i])).add(files[i].getAbsolutePath());
+                }else {
+                    ArrayList<String> filePathList= new ArrayList<>();
+                checkSumMap.put(getMD5Checksum(files[i]), filePathList);
+                filePathList.add(files[i].getAbsolutePath());
+                }
+            } catch (Exception e) {  }
+        }
+
+        for () {
+            if(checkSumMap.)
+
+        }
+
+
+
+
     }
-}
+
+
+
+
+    public static byte[] createChecksum(File filename) throws Exception {
+        InputStream fis =  new FileInputStream(filename);
+
+        byte[] buffer = new byte[1024];
+        MessageDigest complete = MessageDigest.getInstance("MD5");
+        int numRead;
+
+        do {
+            numRead = fis.read(buffer);
+            if (numRead > 0) {
+                complete.update(buffer, 0, numRead);
+            }
+        } while (numRead != -1);
+
+        fis.close();
+        return complete.digest();
+    }
+
+
+
+    public static String getMD5Checksum(File filename) throws Exception {
+        byte[] b = createChecksum(filename);
+        String result = "";
+
+        for (int i=0; i < b.length; i++) {
+            result += Integer.toString( ( b[i] & 0xff ) + 0x100, 16).substring( 1 );
+        }
+        return result;
+    }
+
+   }
