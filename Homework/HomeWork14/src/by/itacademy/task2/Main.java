@@ -35,7 +35,9 @@ public class Main {
         }
 
 
-        HashMap<String, HashMap<String, ArrayList<String>>> mp3HashMap = new HashMap<>();
+        HashMap<String, HashMap<String, HashMap<String,ArrayList<String>>>> mp3HashMap = new HashMap<>();
+
+
         for (Mp3File mp3File : mp3List) {
             String currentArtist = mp3File.getId3v2Tag().getArtist();
             if(currentArtist==null) {
@@ -45,49 +47,59 @@ public class Main {
             if(currentAlbum==null) {
                 currentAlbum="Unknown";
             }
-            String currentTrack = mp3File.getId3v2Tag().getTrack();
+            String currentTrack = mp3File.getId3v2Tag().getTitle();
             if(currentTrack==null){
                 currentTrack="Unknown";
             }
+
+            String currentLong = Integer.toString(mp3File.getId3v2Tag().getLength());
+
+            String currentPath = mp3File.getFilename();
+
             if (mp3HashMap.containsKey(currentArtist)) {
 
-            } else {
                 if (mp3HashMap.get(currentArtist).containsKey(currentAlbum)) {
-                    mp3HashMap.get(currentArtist).get(currentAlbum).add(currentTrack);
+                    ArrayList<String> trackInformation = new ArrayList<>();
+                    trackInformation.add(currentLong);
+                    trackInformation.add(currentPath);
+                    mp3HashMap.get(currentArtist).get(currentAlbum).put(currentTrack,trackInformation);
                 } else {
-                    ArrayList<String> trackList = new ArrayList<>();
-                    trackList.add(currentTrack);
-                    HashMap<String, ArrayList<String>> albumList = new HashMap<>();
+                    HashMap<String, HashMap<String,ArrayList<String>>> albumList = new HashMap<>();
+                    HashMap<String,ArrayList<String>> trackList =  new HashMap<>();
+                    ArrayList<String> trackInformation = new ArrayList<>();
+                    trackInformation.add(currentLong);
+                    trackInformation.add(currentPath);
+                    trackList.put(currentTrack,trackInformation);
                     albumList.put(currentAlbum,trackList);
                     mp3HashMap.get(currentArtist).putAll(albumList);
                 }
-                ArrayList<String> trackList = new ArrayList<>();
-                trackList.add(currentTrack);
-                HashMap<String, ArrayList<String>> albumList = new HashMap<>();
+
+            } else {
+                HashMap<String, HashMap<String,ArrayList<String>>> albumList = new HashMap<>();
+                HashMap<String,ArrayList<String>> trackList =  new HashMap<>();
+                ArrayList<String> trackInformation = new ArrayList<>();
+                trackInformation.add(currentLong);
+                trackInformation.add(currentPath);
+                trackList.put(currentTrack,trackInformation);
                 albumList.put(currentAlbum,trackList);
                 mp3HashMap.put(currentArtist,albumList);
 
             }
 
-        }
+
 
         printMyMp3(mp3HashMap);
 
     }
+    }
 
 
-    public static void printMyMp3( HashMap<String, HashMap<String, ArrayList<String>>> mp3HashMap){
+    public static void printMyMp3( HashMap<String, HashMap<String, HashMap<String,ArrayList<String>>>> mp3HashMap){
 
-        for ( HashMap.Entry<String, HashMap<String, ArrayList<String>>> entry: mp3HashMap.entrySet()){
-            System.out.println("Исполнитель  "+entry.getKey());
+        for ( String artist: mp3HashMap.keySet()){
+            System.out.println("Исполнитель  "+artist);
 
-            for(HashMap.Entry<String, ArrayList<String>> entry1 : entry.getValue().entrySet()){
-                System.out.println("     Альбом: "+ entry1.getKey());
 
-                for (int i=0; i<entry1.getValue().size();i++){
-                    System.out.println("           Название: "+entry1.getValue().get(i));
-                }
-            }
         }
 
 
