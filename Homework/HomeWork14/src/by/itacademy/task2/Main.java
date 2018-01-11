@@ -5,20 +5,14 @@ import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.security.MessageDigest;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
 
         File folder = new File(args[0]);
         File[] files = folder.listFiles();
-        //new Mp3CheckSum().Mp3CheckSum(files);
 
 
         ArrayList<Mp3File> mp3List = new ArrayList<>();
@@ -33,88 +27,22 @@ public class Main {
                 e.printStackTrace();
             }
         }
+        CatalogMp3 currentCatalog = new CatalogMp3();
+        currentCatalog.printMyMp3(currentCatalog.createCatalogAll(mp3List));
+        System.out.println();
+        new Mp3CheckSum().Mp3CheckSum(files);
+        System.out.println();
+        DuplicateByTags duplicateByTags = new DuplicateByTags();
+        duplicateByTags.printDuplicatesByTags(duplicateByTags.createCatalogNoDuplicate(mp3List));
 
-
-        HashMap<String, HashMap<String, HashMap<String, ArrayList<String>>>> mp3HashMap = new HashMap<>();
-
-
-        for (Mp3File mp3File : mp3List) {
-            String currentArtist = mp3File.getId3v2Tag().getArtist();
-            if (currentArtist == null) {
-                currentArtist = "Unknown Artist";
-            }
-            String currentAlbum = mp3File.getId3v2Tag().getAlbum();
-            if (currentAlbum == null) {
-                currentAlbum = "Unknown";
-            }
-            String currentTrack = mp3File.getId3v2Tag().getTitle();
-            if (currentTrack == null) {
-                currentTrack = "Unknown";
-            }
-
-            int lengthSec = (int) mp3File.getLengthInSeconds();
-            int lengthMin = lengthSec/60;
-
-
-            String currentLong = lengthMin+" мин "+(lengthSec-lengthMin*60)+ " секунд";
-
-
-            String currentPath = mp3File.getFilename();
-
-            if (mp3HashMap.containsKey(currentArtist)) {
-
-                if (mp3HashMap.get(currentArtist).containsKey(currentAlbum)) {
-
-                    ArrayList<String> trackInformation = new ArrayList<>();
-                    trackInformation.add(currentLong);
-                    trackInformation.add(currentPath);
-                    mp3HashMap.get(currentArtist).get(currentAlbum).put(currentTrack, trackInformation);
-                } else {
-                    HashMap<String, HashMap<String, ArrayList<String>>> albumList = new HashMap<>();
-                    HashMap<String, ArrayList<String>> trackList = new HashMap<>();
-                    ArrayList<String> trackInformation = new ArrayList<>();
-                    trackInformation.add(currentLong);
-                    trackInformation.add(currentPath);
-                    trackList.put(currentTrack, trackInformation);
-                    albumList.put(currentAlbum, trackList);
-                    mp3HashMap.get(currentArtist).putAll(albumList);
-                }
-
-            } else {
-                HashMap<String, HashMap<String, ArrayList<String>>> albumList = new HashMap<>();
-                HashMap<String, ArrayList<String>> trackList = new HashMap<>();
-                ArrayList<String> trackInformation = new ArrayList<>();
-                trackInformation.add(currentLong);
-                trackInformation.add(currentPath);
-                trackList.put(currentTrack, trackInformation);
-                albumList.put(currentAlbum, trackList);
-                mp3HashMap.put(currentArtist, albumList);
-
-            }
-
-        }
-        printMyMp3(mp3HashMap);
     }
 
 
-    public static void printMyMp3(HashMap<String, HashMap<String, HashMap<String, ArrayList<String>>>> mp3HashMap) {
-
-        for (String artist : mp3HashMap.keySet()) {
-            System.out.println("Исполнитель  " + artist);
-
-            for (HashMap.Entry<String, HashMap<String, ArrayList<String>>> entry1 : mp3HashMap.get(artist).entrySet()) {
-                System.out.println("    Альбом: " + entry1.getKey());
-                for (HashMap.Entry<String, ArrayList<String>> entry2 : entry1.getValue().entrySet()) {
-                    System.out.println("          Композиция: " + entry2.getKey()+" Длительность: "+ entry2.getValue().get(0)
-                            +" ("+entry2.getValue().get(1)+")");
-
-                }
-            }
 
 
-        }
     }
-}
+
+
 
 
 
