@@ -52,7 +52,12 @@ public class Main {
                 currentTrack = "Unknown";
             }
 
-            String currentLong = Integer.toString(mp3File.getId3v2Tag().getLength());
+            int lengthSec = (int) mp3File.getLengthInSeconds();
+            int lengthMin = lengthSec/60;
+
+
+            String currentLong = lengthMin+" мин "+(lengthSec-lengthMin*60)+ " секунд";
+
 
             String currentPath = mp3File.getFilename();
 
@@ -100,8 +105,8 @@ public class Main {
             for (HashMap.Entry<String, HashMap<String, ArrayList<String>>> entry1 : mp3HashMap.get(artist).entrySet()) {
                 System.out.println("    Альбом: " + entry1.getKey());
                 for (HashMap.Entry<String, ArrayList<String>> entry2 : entry1.getValue().entrySet()) {
-                    System.out.println("          Композиция: " + entry2.getKey());
-
+                    System.out.println("          Композиция: " + entry2.getKey()+" Длительность: "+ entry2.getValue().get(0)
+                            +" ("+entry2.getValue().get(1)+")");
 
                 }
             }
