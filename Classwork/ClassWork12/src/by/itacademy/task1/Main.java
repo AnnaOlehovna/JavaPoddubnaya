@@ -9,13 +9,7 @@ import com.google.gson.GsonBuilder;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -53,8 +47,8 @@ public class Main {
                 while((byteRead = inputStream.read(buffer))!=-1){
                     fileOutputStream.write(buffer,0,byteRead);
 
-                    //parseJson();
-                    parseGson();
+                    parseJson();
+//                    parseGson();
 
                 }
             }else {
@@ -93,6 +87,9 @@ public class Main {
             JSONObject root = (JSONObject) parser.parse(fileReader);
 
             String nameRoot = (String) root.get("name");
+            System.out.println("name = "+nameRoot);
+
+            String gender = (String) root.get("name");
             System.out.println("name = "+nameRoot);
 
             JSONArray peopleList = (JSONArray) root.get("people");
