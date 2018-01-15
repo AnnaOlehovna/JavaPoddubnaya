@@ -1,6 +1,8 @@
 package by.itacademy.task2;
 
 
+import com.sun.org.apache.xml.internal.serialize.OutputFormat;
+import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -14,6 +16,8 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.io.IOException;
+import java.io.StringWriter;
+import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -24,24 +28,29 @@ import java.util.regex.Pattern;
 
 public class Main {
 
+    public static ArrayList<File> fileList = new ArrayList<>();
+
     public static void main(String[] args) {
 
         for (int i = 0; i < args.length; i++) {
             File currentfile = new File(args[i]);
-            ArrayList<File> fileList = fileArray(currentfile);
-            for (File currentFile : fileList) {
-                System.out.println(currentFile.getAbsoluteFile());
-            }
-
-            toXML(currentfile);
-
+            fileList = fileArray(currentfile);
         }
+        for (File currentFile : fileList) {
 
+            System.out.println(currentFile.getAbsoluteFile());
+        }
+        toXML();
     }
 
+
+    /**
+     * Создание ArrayList fileList с раширением .txt
+     * @param
+     * @return
+     */
     public static ArrayList<File> fileArray(File inFile) {
         File[] files = inFile.listFiles();
-        ArrayList<File> fileList = new ArrayList<>();
         for (File file : files) {
 
             if (file.isDirectory()) {
@@ -59,19 +68,20 @@ public class Main {
         return fileList;
     }
 
-
-    public static void toXML(File inFile) {
-        ArrayList<File> files = fileArray(inFile);
+    /**
+     * Создание XML из  ArrayList fileList
+     */
+    public static void toXML() {
         Document document = null;
         try {
             document = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
         }
-          Element files1 = document.createElement("files1");
+        Element files1 = document.createElement("files1");
         document.appendChild(files1);
 
-        for (File currentfile : files) {
+        for (File currentfile : fileList) {
             Element file = document.createElement("file");
             files1.appendChild(file);
 
@@ -98,6 +108,7 @@ public class Main {
             datetime.setTextContent(String.valueOf(attr.creationTime()));
             file.appendChild(datetime);
             try {
+
                 Transformer transformer = TransformerFactory.newInstance().newTransformer();
                 DOMSource source = new DOMSource(document);
                 StreamResult result = new StreamResult(new File("myXML.xml"));
@@ -111,7 +122,6 @@ public class Main {
                 e.printStackTrace();
             }
         }
-
     }
 }
 
