@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<files>
+    <ext name="txt">
+        <file>D:\Всякое\test\1.txt</file>
+    <file>D:\Всякое\test\123\3.txt</file>
+        <file>D:\Всякое\test\2.txt</file>
+        <file>D:\Всякое\test2\4.txt</file>
+    </ext>
+    <ext name="mp3">
+        <file>D:\Всякое\test\123\02-mamonov.mp3</file>
+        <file>D:\Всякое\test\123\09. Шмели.mp3</file>
+        <file>D:\Всякое\test\Ed Sheeran – Afire Love.mp3</file>
+        <file>D:\Всякое\test\Ed Sheeran – Give Me Love.mp3</file><file>D:\Всякое\test\Ed Sheeran – Lego House.mp3</file></ext><ext name="pdf"><file>D:\Всякое\test2\downfile.pdf</file><file>D:\Всякое\test2\акт.PDF</file></ext></files>
