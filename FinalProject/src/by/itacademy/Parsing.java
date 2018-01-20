@@ -1,4 +1,4 @@
-package by.itacademy.domein.usecase;
+package by.itacademy;
 
 import java.io.File;
 

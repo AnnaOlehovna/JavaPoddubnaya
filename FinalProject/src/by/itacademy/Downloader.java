@@ -1,4 +1,4 @@
-package by.itacademy.domein.usecase;
+package by.itacademy;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -7,7 +7,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class Donwloader {
+public class Downloader {
 
     private void download(String link) {
         String filePath = "";
@@ -63,4 +63,6 @@ public class Donwloader {
             }
         }
     }
+
+
 }

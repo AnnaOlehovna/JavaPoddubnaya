@@ -1,4 +1,4 @@
-package by.itacademy.domein.Entity;
+package by.itacademy.Entity;
 
 
 import java.util.Date;
@@ -33,4 +33,15 @@ public class Root {
     public void setWeatherList(List<Weather> weatherList) {
         this.weatherList = weatherList;
     }
+
+
+    @Override
+    public String toString() {
+        return "Root{" +
+                "date=" + date +
+                ", name='" + name + '\'' +
+                ", weatherList=" + weatherList +
+                '}';
+    }
 }
+

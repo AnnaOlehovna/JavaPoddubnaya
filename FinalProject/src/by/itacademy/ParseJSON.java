@@ -1,10 +1,6 @@
-package by.itacademy.domein.usecase;
+package by.itacademy;
 
-import com.google.gson.GsonBuilder;
-
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 
 public class ParseJSON implements Parsing{
     @Override
