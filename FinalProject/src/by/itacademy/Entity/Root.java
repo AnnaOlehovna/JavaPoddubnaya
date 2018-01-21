@@ -6,9 +6,9 @@ import java.util.List;
 
 public class Root {
 
-   private Date date;
-   private String name;
-   private List<Weather> weatherList;
+    private String name;
+    private Date date;
+    private List<Weather> weatherList;
 
     public Date getDate() {
         return date;

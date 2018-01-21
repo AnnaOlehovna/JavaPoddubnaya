@@ -1,25 +1,29 @@
 package by.itacademy.presentation;
 
-import by.itacademy.ParseXML;
-import by.itacademy.Parsing;
+import by.itacademy.Manager;
 
-import java.io.File;
-import java.io.UTFDataFormatException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-import java.util.TimeZone;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
 
-        Parsing parsing = new ParseXML();
-        File file = new File("D:/weather.xml");
-        parsing.parsingFile(file);
 
-        
+        Manager manager = Manager.getInstance();
+
+        System.out.printf("Введите:\n1- чтобы скачать и распарсить XML\n2- чтобы скачать и распарсить JSON" +
+                "\n3- чтобы выйти\nОтвет: ");
+        Scanner scanner = new Scanner(System.in);
+        int choice=scanner.nextInt();
+        manager.downloadingAndParsing(choice);
+
+
+
+
+    }
+
+
+
+    public void printMessages(String text){
+        System.out.println(text);
     }
 }

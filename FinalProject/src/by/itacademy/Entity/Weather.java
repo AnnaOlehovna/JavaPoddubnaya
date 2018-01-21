@@ -1,5 +1,7 @@
 package by.itacademy.Entity;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -7,14 +9,19 @@ import java.util.List;
 
 public class Weather {
 
-    private Date date;
-    private String description;
-    private int humidity;
     private int id;
-    private HashMap<String, List<City>> location;
-    private int tempMax;
-    private int tempMin;
     private String title;
+    private String description;
+    private Date date;
+    @SerializedName("temp_min")
+    private int tempMin;
+    @SerializedName("temp_max")
+    private int tempMax;
+    private int humidity;
+       private HashMap<String, List<City>> location;
+
+
+
 
 
     public Weather(Date date, String description, int humidity, int id, HashMap<String, List<City>> location, int tempMax, int tempMin, String title) {

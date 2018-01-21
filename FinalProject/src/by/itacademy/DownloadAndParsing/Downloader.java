@@ -1,4 +1,6 @@
-package by.itacademy;
+package by.itacademy.DownloadAndParsing;
+
+import by.itacademy.presentation.EventManager;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -7,9 +9,10 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class Downloader {
+public class Downloader extends EventManager{
 
-    private void download(String link) {
+
+        public String download(String link) {
         String filePath = "";
         InputStream inputStream = null;
 
@@ -28,9 +31,9 @@ public class Downloader {
                 inputStream = httpURLConnection.getInputStream();
 
                 if(link.endsWith(".xml")){
-                    filePath = "test.xml";
+                    filePath = "weather.xml";
                 }else if(link.endsWith(".json")){
-                    filePath = "test.json";
+                    filePath = "weather.json";
                 }
 
                 File file = new File(filePath);
@@ -42,27 +45,29 @@ public class Downloader {
                     fileOutputStream.write(buffer, 0, byteRead);
                 }
             } else {
-                System.out.println("Данные не найдены, response code = " + responseCode);
+               sendMessage( "Данные не найдены, response code = " + responseCode);
+
             }
 
         } catch (Exception e) {
-            System.out.println("Невозможно скачать файл. Ошибка " + e.toString());
+            sendMessage( "Невозможно скачать файл. Ошибка " + e.toString());
         } finally {
             if (inputStream != null && fileOutputStream != null) {
 
                 try {
                     inputStream.close();
                 } catch (IOException e) {
-                    System.out.println("Невозможно закрыть inputStream. Ошибка " + e.toString());
+                    sendMessage("Невозможно закрыть inputStream. Ошибка " + e.toString());
                 }
                 try {
                     fileOutputStream.close();
                 } catch (IOException e) {
-                    System.out.println("Невозможно закрыть fileOutputStream. Ошибка " + e.toString());
+                    sendMessage("Невозможно закрыть fileOutputStream. Ошибка " + e.toString());
+
                 }
             }
         }
+        return filePath;
     }
-
 
 }

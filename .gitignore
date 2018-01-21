@@ -2,3 +2,5 @@
 .out/
 *.class
 *.iml
+*.xml
+*.json
