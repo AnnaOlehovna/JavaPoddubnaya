@@ -1,7 +1,7 @@
-package by.itacademy.presentation;
+package by.itacademy.Manager;
 
-import by.itacademy.Listener;
-import by.itacademy.Manager;
+import by.itacademy.Manager.Listener;
+import by.itacademy.Manager.Manager;
 
 public class EventManager {
    Listener listener = Manager.getInstance();

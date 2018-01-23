@@ -1,9 +1,7 @@
-package by.itacademy.presentation;
+package by.itacademy.Presentation;
 
-import by.itacademy.DownloadAndParsing.ParseJSON;
-import by.itacademy.Manager;
+import by.itacademy.Manager.Manager;
 
-import java.io.File;
 import java.util.Scanner;
 
 public class Main {
@@ -15,8 +13,7 @@ public class Main {
         System.out.printf("Введите:\n1- чтобы скачать и распарсить XML\n2- чтобы скачать и распарсить JSON" +
                 "\n3- чтобы выйти\nОтвет: ");
         Scanner scanner = new Scanner(System.in);
-        int choice=scanner.nextInt();
-        manager.downloadingAndParsing(choice);
+        manager.downloadingAndParsing(scanner.nextInt());
 
 
 
@@ -24,6 +21,7 @@ public class Main {
 
 
     }
+
 
 
 

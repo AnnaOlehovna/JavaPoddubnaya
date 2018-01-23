@@ -1,6 +1,8 @@
 package by.itacademy.Entity;
 
 
+import by.itacademy.Manager.ConvertDate;
+
 import java.util.Date;
 import java.util.List;
 
@@ -39,11 +41,11 @@ public class Root {
 
     @Override
     public String toString() {
+        ConvertDate convertDate = new ConvertDate();
         return "Root{" +
-                "date=" + date +
-                ", name='" + name + '\'' +
-                ", weatherList=" + weatherList +
-                '}';
+                "\ndate=" + convertDate.convertDateToString(date) +
+                ", \nname=" + name  +
+                ", \nweather: [" + weatherList+"]";
     }
 }
 

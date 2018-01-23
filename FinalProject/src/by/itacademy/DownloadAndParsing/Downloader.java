@@ -1,6 +1,6 @@
 package by.itacademy.DownloadAndParsing;
 
-import by.itacademy.presentation.EventManager;
+import by.itacademy.Manager.EventManager;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -9,11 +9,21 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class Downloader extends EventManager{
+public class Downloader extends EventManager  {
 
+    private File file;
 
-        public String download(String link) {
-        String filePath = "";
+    public File getFile() {
+        return file;
+    }
+
+    public void setFile(File file) {
+        this.file = file;
+    }
+
+    public void download(String link) {
+        String filePath ="";
+
         InputStream inputStream = null;
 
         FileOutputStream fileOutputStream = null;
@@ -30,13 +40,13 @@ public class Downloader extends EventManager{
 
                 inputStream = httpURLConnection.getInputStream();
 
-                if(link.endsWith(".xml")){
-                    filePath = "weather.xml";
-                }else if(link.endsWith(".json")){
+                if (link.endsWith(".xml")) {
+                   filePath = "weather.xml";
+                } else if (link.endsWith(".json")) {
                     filePath = "weather.json";
                 }
 
-                File file = new File(filePath);
+                file = new File(filePath);
                 fileOutputStream = new FileOutputStream(file);
 
                 int byteRead = -1;
@@ -45,12 +55,12 @@ public class Downloader extends EventManager{
                     fileOutputStream.write(buffer, 0, byteRead);
                 }
             } else {
-               sendMessage( "Данные не найдены, response code = " + responseCode);
+                sendMessage("Данные не найдены, response code = " + responseCode);
 
             }
 
         } catch (Exception e) {
-            sendMessage( "Невозможно скачать файл. Ошибка " + e.toString());
+            sendMessage("Невозможно скачать файл. Ошибка " + e.toString());
         } finally {
             if (inputStream != null && fileOutputStream != null) {
 
@@ -66,8 +76,10 @@ public class Downloader extends EventManager{
 
                 }
             }
+
         }
-        return filePath;
+
     }
+
 
 }

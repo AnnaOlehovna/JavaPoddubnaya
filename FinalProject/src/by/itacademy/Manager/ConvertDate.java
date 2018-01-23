@@ -1,10 +1,11 @@
-package by.itacademy.DownloadAndParsing;
+package by.itacademy.Manager;
 
-import by.itacademy.presentation.EventManager;
+import by.itacademy.Manager.EventManager;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class ConvertDate extends EventManager {
 
@@ -23,4 +24,12 @@ public class ConvertDate extends EventManager {
             sendMessage("Невозможно распарсить дату");
         }
         return date;
+    }
+
+    public String convertDateToString(Date date) {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy HH:mm:ss", Locale.forLanguageTag("RU"));
+        String dateInString = sdf.format(date);
+
+        return dateInString;
     }}

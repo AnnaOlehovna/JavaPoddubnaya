@@ -1,4 +1,4 @@
-package by.itacademy;
+package by.itacademy.Manager;
 
 public interface Listener {
 

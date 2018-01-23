@@ -10,3 +10,4 @@ public interface Parsing {
      */
     void parsingFile(File file);
 }
+

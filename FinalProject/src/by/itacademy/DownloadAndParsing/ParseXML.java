@@ -3,7 +3,8 @@ package by.itacademy.DownloadAndParsing;
 import by.itacademy.Entity.City;
 import by.itacademy.Entity.Root;
 import by.itacademy.Entity.Weather;
-import by.itacademy.presentation.EventManager;
+import by.itacademy.Manager.ConvertDate;
+import by.itacademy.Manager.EventManager;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -12,8 +13,6 @@ import org.w3c.dom.NodeList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -23,10 +22,10 @@ import java.util.regex.Pattern;
  */
 public class ParseXML extends EventManager implements Parsing {
 
+
     ConvertDate convertDate = new ConvertDate();
 
 
-    @Override
     public void parsingFile(File file) {
 
         Document dom;
@@ -52,7 +51,7 @@ public class ParseXML extends EventManager implements Parsing {
         Node dateNode = dateNodeList.item(0);
 
         String dateRoot = dateNode.getTextContent();
-        Date date = convertStringtoDate(dateRoot);
+        Date date = convertDate.convertStringtoDate(dateRoot);
         root.setDate(date);
 
 
@@ -126,19 +125,5 @@ public class ParseXML extends EventManager implements Parsing {
     }
 
 
-    /**
-     * Convert date from String format to class Date according to the pattern
-     * @param  dateInString
-     * @return class Date
-     */
-    private Date convertStringtoDate(String dateInString) {
-        Date date = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss Z");
-        try {
-            date = sdf.parse(dateInString);
-        } catch (ParseException e) {
-           sendMessage("Невозможно распарсить дату");
-        }
-        return date;
-    }
+
 }

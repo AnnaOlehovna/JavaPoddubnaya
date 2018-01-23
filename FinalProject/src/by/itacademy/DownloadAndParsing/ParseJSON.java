@@ -3,15 +3,13 @@ package by.itacademy.DownloadAndParsing;
 import by.itacademy.Entity.City;
 import by.itacademy.Entity.Root;
 import by.itacademy.Entity.Weather;
-import by.itacademy.presentation.EventManager;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
+import by.itacademy.Manager.ConvertDate;
+import by.itacademy.Manager.EventManager;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import java.io.BufferedReader;
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -25,7 +23,8 @@ import java.util.regex.Pattern;
 /**
  * Parsing data from JSON to Entity
  */
-public class ParseJSON extends EventManager implements Parsing{
+public class ParseJSON extends EventManager implements Parsing {
+
 
     ConvertDate convertDate = new ConvertDate();
 
@@ -99,8 +98,6 @@ public class ParseJSON extends EventManager implements Parsing{
 
                 System.out.println(root.toString());
 
-
-
             }catch (Exception e){
                 System.out.println("Невозможно открыть json, error = "+e.toString());
             }finally {
@@ -114,5 +111,7 @@ public class ParseJSON extends EventManager implements Parsing{
                 }
             }
         }
-    }
+
+
+}
 

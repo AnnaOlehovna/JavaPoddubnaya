@@ -1,6 +1,8 @@
 package by.itacademy.Entity;
 
 
+import by.itacademy.Manager.ConvertDate;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -98,15 +100,14 @@ public class Weather {
 
     @Override
     public String toString() {
-        return "Weather{" +
-                "date=" + date +
-                ", description='" + description + '\'' +
-                ", humidity=" + humidity +
-                ", id=" + id +
-                ", location=" + location +
-                ", tempMax=" + tempMax +
-                ", tempMin=" + tempMin +
-                ", title='" + title + '\'' +
-                '}';
+        ConvertDate convertDate = new ConvertDate();
+        return  "\ndate=" + convertDate.convertDateToString(date) +
+                ", \ndescription= " + description +
+                ", \nhumidity= " + humidity +
+                ", \nid= " + id +
+                ", \nlocation= " + location +
+                ", \ntempMax= " + tempMax +
+                ", \ntempMin= " + tempMin +
+                ", \ntitle= " + title;
     }
 }
