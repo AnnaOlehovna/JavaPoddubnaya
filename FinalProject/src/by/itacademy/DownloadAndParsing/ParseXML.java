@@ -23,6 +23,8 @@ import java.util.regex.Pattern;
  */
 public class ParseXML extends EventManager implements Parsing {
 
+    ConvertDate convertDate = new ConvertDate();
+
 
     @Override
     public void parsingFile(File file) {
@@ -78,7 +80,7 @@ public class ParseXML extends EventManager implements Parsing {
             Element element = (Element) node;
 
             String dateElement = element.getElementsByTagName("date").item(0).getTextContent();
-            Date currentDate = convertStringtoDate(dateElement);
+            Date currentDate = convertDate.convertStringtoDate(dateElement);
             String description = element.getElementsByTagName("description").item(0).getTextContent();
             int humidity = Integer.parseInt(element.getElementsByTagName("humidity").item(0).getTextContent());
             int id = Integer.parseInt(element.getElementsByTagName("id").item(0).getTextContent());
@@ -120,6 +122,7 @@ public class ParseXML extends EventManager implements Parsing {
         weatherList.add(weather);
         }
         root.setWeatherList(weatherList);
+        System.out.println(root.toString());
     }
 
 

@@ -8,6 +8,8 @@ public class Root {
 
     private String name;
     private Date date;
+
+
     private List<Weather> weatherList;
 
     public Date getDate() {

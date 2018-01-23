@@ -1,7 +1,9 @@
 package by.itacademy.presentation;
 
+import by.itacademy.DownloadAndParsing.ParseJSON;
 import by.itacademy.Manager;
 
+import java.io.File;
 import java.util.Scanner;
 
 public class Main {
@@ -15,6 +17,8 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         int choice=scanner.nextInt();
         manager.downloadingAndParsing(choice);
+
+
 
 
 
