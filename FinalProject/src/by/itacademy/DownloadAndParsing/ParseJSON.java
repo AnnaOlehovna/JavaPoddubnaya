@@ -30,14 +30,14 @@ public class ParseJSON extends EventManager implements Parsing {
 
 
     @Override
-    public void parsingFile(File file) {
-
+    public Root parsingFile(File file) {
+            Root root = new Root();
             JSONParser parser = new JSONParser();
 
             FileReader fileReader = null;
 
             try{
-                Root root = new Root();
+
                 fileReader = new FileReader(file);
 
                 JSONObject rootJson = (JSONObject) parser.parse(fileReader);
@@ -103,21 +103,19 @@ public class ParseJSON extends EventManager implements Parsing {
                 root.setDate(dateRoot);
                 root.setWeatherList(weatherList);
 
-
-                System.out.println(root.toString());
-
             }catch (Exception e){
-                System.out.println("Невозможно открыть json, error = "+e.toString());
+                sendMessage("Невозможно открыть json, error = "+e.toString());
             }finally {
                 if(fileReader!=null){
                     try{
                         fileReader.close();
                     }catch (IOException e){
-                        System.out.println("невозможно закрыть filereader "+e.toString());
+                        sendMessage("невозможно закрыть filereader "+e.toString());
                     }
 
                 }
             }
+            return root;
         }
 
 

@@ -26,8 +26,8 @@ public class ParseXML extends EventManager implements Parsing {
     ConvertDate convertDate = new ConvertDate();
 
 
-    public void parsingFile(File file) {
-
+    public Root parsingFile(File file) {
+        Root root = new Root();
         Document dom;
 
         try {
@@ -38,11 +38,8 @@ public class ParseXML extends EventManager implements Parsing {
 
         } catch (Exception e) {
             sendMessage("Невозможно открыть xml, error = " + e.toString());
-            return;
+            return null;
         }
-
-
-        Root root = new Root();
 
         Element rootElement = dom.getDocumentElement();
 
@@ -121,7 +118,7 @@ public class ParseXML extends EventManager implements Parsing {
         weatherList.add(weather);
         }
         root.setWeatherList(weatherList);
-        System.out.println(root.toString());
+        return root;
     }
 
 

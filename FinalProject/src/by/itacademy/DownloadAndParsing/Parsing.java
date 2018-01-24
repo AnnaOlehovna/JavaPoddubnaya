@@ -1,5 +1,7 @@
 package by.itacademy.DownloadAndParsing;
 
+import by.itacademy.Entity.Root;
+
 import java.io.File;
 
 public interface Parsing {
@@ -8,6 +10,6 @@ public interface Parsing {
      * Parsing data from files to Entity
      * @param file  for parsing
      */
-    void parsingFile(File file);
+    Root parsingFile(File file);
 }
 
