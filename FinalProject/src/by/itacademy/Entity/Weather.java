@@ -20,8 +20,8 @@ public class Weather {
 
     private HashMap<String, List<City>> location;
 
-
-
+    public Weather() {
+    }
 
     public Weather(Date date, String description, int humidity, int id, HashMap<String, List<City>> location, int tempMax, int tempMin, String title) {
         this.date = date;
@@ -98,16 +98,29 @@ public class Weather {
         this.title = title;
     }
 
+   public String locationToString(){
+      String locationString="\nСтрана: ";
+       for (String country: location.keySet())
+       {
+           locationString =locationString.concat(country);
+           for (City city:location.get(country) ) {
+
+               locationString = locationString.concat("\n\t"+city.toString());
+           }
+       }
+       return locationString;
+   }
+
     @Override
     public String toString() {
         ConvertDate convertDate = new ConvertDate();
-        return  "\ndate=" + convertDate.convertDateToString(date) +
-                ", \ndescription= " + description +
-                ", \nhumidity= " + humidity +
-                ", \nid= " + id +
-                ", \nlocation= " + location +
-                ", \ntempMax= " + tempMax +
-                ", \ntempMin= " + tempMin +
-                ", \ntitle= " + title;
+        return    "\n\nID = "   + id +
+                "\nДата: " + convertDate.convertDateToString(date) +
+                " \nПогодные условия: " + title+
+                " \nМестоположение: " + locationToString() +
+                " \nОписание: " + description +
+                 " \nВлажность: " + humidity +
+                "% \nМаксимальная температура = " + tempMax +
+                " \nМинимальная температура = " + tempMin;
     }
 }

@@ -28,7 +28,7 @@ public class ConvertDate extends EventManager {
 
     public String convertDateToString(Date date) {
 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy HH:mm:ss", Locale.forLanguageTag("RU"));
+        SimpleDateFormat sdf = new SimpleDateFormat("EEEE, dd MMMM yyyy HH:mm:ss", Locale.forLanguageTag("RU"));
         String dateInString = sdf.format(date);
 
         return dateInString;

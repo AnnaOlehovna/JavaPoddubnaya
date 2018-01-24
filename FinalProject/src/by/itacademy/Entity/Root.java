@@ -39,13 +39,21 @@ public class Root {
     }
 
 
+    public String weatherListToString(){
+        String weathers="";
+        for (Weather wea : weatherList) {
+            weathers=weathers.concat(wea.toString());
+        }
+        return weathers;
+    }
+
+
     @Override
     public String toString() {
         ConvertDate convertDate = new ConvertDate();
-        return "Root{" +
-                "\ndate=" + convertDate.convertDateToString(date) +
-                ", \nname=" + name  +
-                ", \nweather: [" + weatherList+"]";
+        return  " \nНАЗВАНИЕ ЦЕНТРА: " + name  +
+                "\nДАТА СОЗДАНИЕ ЦЕНТРА: " + convertDate.convertDateToString(date) +
+                ", \n\t\t\tПОГОДА" + weatherListToString();
     }
 }
 

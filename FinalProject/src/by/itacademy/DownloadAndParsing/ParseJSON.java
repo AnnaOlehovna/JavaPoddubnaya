@@ -86,7 +86,15 @@ public class ParseJSON extends EventManager implements Parsing {
                             }
                         }
                     }
-                    Weather weather = new Weather(date,description,(int)humidity,(int)id,locationMap,(int)tempMin,(int)tempMax,title);
+                    Weather weather = new Weather();
+                    weather.setDate(date);
+                    weather.setDescription(description);
+                    weather.setHumidity((int)humidity);
+                    weather.setId((int)id);
+                    weather.setLocation(locationMap);
+                    weather.setTempMax((int)tempMax);
+                    weather.setTempMin((int)tempMin);
+                    weather.setTitle(title);
                     weatherList.add(weather);
 
                 }
