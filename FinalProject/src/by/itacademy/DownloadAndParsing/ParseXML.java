@@ -23,7 +23,7 @@ import java.util.regex.Pattern;
 public class ParseXML extends EventManager implements Parsing {
 
 
-    ConvertDate convertDate = new ConvertDate();
+    private ConvertDate convertDate = new ConvertDate();
 
 
     public Root parsingFile(File file) {

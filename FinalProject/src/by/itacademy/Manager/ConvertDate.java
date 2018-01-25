@@ -1,6 +1,5 @@
 package by.itacademy.Manager;
 
-import by.itacademy.Manager.EventManager;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,7 +11,7 @@ public class ConvertDate extends EventManager {
 
     /**
      * Convert date from String format to class Date according to the pattern
-     * @param  dateInString
+     * @param  dateInString String date
      * @return class Date
      */
     public Date convertStringtoDate(String dateInString) {
@@ -29,7 +28,5 @@ public class ConvertDate extends EventManager {
     public String convertDateToString(Date date) {
 
         SimpleDateFormat sdf = new SimpleDateFormat("EEEE, dd MMMM yyyy HH:mm:ss", Locale.forLanguageTag("RU"));
-        String dateInString = sdf.format(date);
-
-        return dateInString;
+        return sdf.format(date);
     }}

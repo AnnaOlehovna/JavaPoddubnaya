@@ -1,10 +1,57 @@
 package by.itacademy.Search;
 
+import by.itacademy.Entity.City;
+import by.itacademy.Entity.Root;
 import by.itacademy.Entity.Weather;
 
-import java.util.ArrayList;
+import java.util.*;
 
-public interface Searching <E> {
 
-    public ArrayList<Weather> search(E e);
+public class Searching {
+
+    private Root root;
+
+
+    public Searching(Root root) {
+        this.root = root;
+    }
+
+    /**
+     * Make search through the Root by temperature range
+     * @param minTemp min temperature
+     * @param maxTemp max temperature
+     * @return cities with temperature between minTemp and maxTemp
+     */
+    public HashSet<City> searchByTemperatureRange(int minTemp, int maxTemp) {
+        HashSet<City> cities = new HashSet<>();
+        for (int i = 0; i < root.getWeatherList().size(); i++) {
+            Weather weather = root.getWeatherList().get(i);
+            if (minTemp <= weather.getTempMin() && maxTemp >= weather.getTempMax()) {
+                for (HashMap.Entry<String, List<City>> entry : weather.getLocation().entrySet()) {
+                    cities.addAll(entry.getValue());
+                }
+            }
+        }
+        return cities;
+    }
+
+    /**
+     * Make search through the Root by name of the city
+     * @param nameCity name of the searching city
+     * @return Weather that contains asked city
+     */
+    public ArrayList<Weather> searchByCity(String nameCity) {
+        ArrayList<Weather> weatherForCity = new ArrayList<>();
+        for (int i = 0; i < root.getWeatherList().size() ; i++) {
+            Weather weather = root.getWeatherList().get(i);
+            for(HashMap.Entry<String, List<City>> entry :weather.getLocation().entrySet()){
+                for(City city: entry.getValue()){
+                    if(city.getName().equals(nameCity)){
+                        weatherForCity.add(weather);
+                    }
+                }
+            }
+        }
+        return weatherForCity;
+    }
 }

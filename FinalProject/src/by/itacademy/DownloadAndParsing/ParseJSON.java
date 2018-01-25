@@ -26,7 +26,7 @@ import java.util.regex.Pattern;
 public class ParseJSON extends EventManager implements Parsing {
 
 
-    ConvertDate convertDate = new ConvertDate();
+   private ConvertDate convertDate = new ConvertDate();
 
 
     @Override
@@ -67,9 +67,9 @@ public class ParseJSON extends EventManager implements Parsing {
 
                     HashMap<String, List<City>> locationMap = new HashMap<>();
 
-                    for (int i = 0; i < locationListJson.size() ; i++) {
+                    for (Object aLocationListJson : locationListJson) {
 
-                        String string = (String) locationListJson.get(i);
+                        String string = (String) aLocationListJson;
                         Pattern pattern = Pattern.compile("^([A-Za-z0-9-]+), ([A-Z]{2})$");
                         Matcher matcher = pattern.matcher(string);
                         if (matcher.matches()) {

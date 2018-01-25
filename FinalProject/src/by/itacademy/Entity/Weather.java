@@ -98,7 +98,7 @@ public class Weather {
         this.title = title;
     }
 
-   public String locationToString(){
+   private String locationToString(){
       String locationString="\nСтрана: ";
        for (String country: location.keySet())
        {

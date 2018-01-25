@@ -5,11 +5,11 @@ import by.itacademy.DownloadAndParsing.Downloader;
 import by.itacademy.DownloadAndParsing.ParseJSON;
 import by.itacademy.DownloadAndParsing.ParseXML;
 import by.itacademy.DownloadAndParsing.Parsing;
+import by.itacademy.Entity.City;
 import by.itacademy.Entity.Root;
 import by.itacademy.Entity.Weather;
 import by.itacademy.Presentation.Main;
 import by.itacademy.Search.Searching;
-import by.itacademy.Search.SearchingByCity;
 import by.itacademy.Sorting.SortingByHumidity;
 import by.itacademy.Sorting.SortingByTempMax;
 import by.itacademy.Sorting.SortingMyTempMin;
@@ -17,12 +17,13 @@ import by.itacademy.Sorting.SortingMyTempMin;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashSet;
 
 public class Manager implements Listener {
     private final String LINK_XML = "http://kiparo.ru/t/weather.xml";
     private final String LINK_JSON = "http://kiparo.ru/t/weather.json";
 
-    Main main = new Main();
+    private Main main = new Main();
     private static Manager instance = new Manager();
     private Root root;
 
@@ -50,8 +51,8 @@ public class Manager implements Listener {
     public void downloadingAndParsing(int choice) {
         Thread myThread = new Thread(() -> {
             Downloader downloader = new Downloader();
-            Parsing parsing = null;
-            File file = null;
+            Parsing parsing;
+            File file;
             switch (choice) {
                 case 1:
                     downloader.download(LINK_XML);
@@ -62,10 +63,10 @@ public class Manager implements Listener {
                     parsing = new ParseJSON();
                     break;
                 case 3:
-                    main.printMessages("Всего доброго!");
+                    Main.goodByeMessage();
                     return;
                 default:
-                    main.printMessages("Неверный ввод!");
+                    getMessage("Неверный ввод!");
                     return;
 
             }
@@ -77,6 +78,7 @@ public class Manager implements Listener {
         try {
             myThread.join();
         } catch (InterruptedException e) {
+            getMessage("My Thread was interrupted");
         }
     }
 
@@ -86,7 +88,7 @@ public class Manager implements Listener {
      * @param choice int
      */
     public void sorting(int choice) {
-        Comparator<Weather> weatherComparator = null;
+        Comparator<Weather> weatherComparator;
         switch (choice) {
             case 1:
                 weatherComparator = new SortingByHumidity();
@@ -98,35 +100,48 @@ public class Manager implements Listener {
                 weatherComparator = new SortingMyTempMin();
                 break;
             case 4:
-                main.printMessages("Всего доброго!");
+                Main.goodByeMessage();
                 return;
             default:
-                main.printMessages("Неверный ввод!");
+                getMessage("Неверный ввод!");
                 return;
         }
         root.getWeatherList().sort(weatherComparator);
-        main.printMessages(root.toString());
+        getMessage(root.toString());
     }
 
     public void searching(int choice){
-        Searching searching;
+        Searching searching = new Searching(root);
         switch (choice){
             case 1:
-               searching = new SearchingByCity(root);
-               ArrayList<Weather> weatherInCurrentCity= searching.search(main.askForCity());
-               main.printMessages(weatherInCurrentCity.toString());
+                ArrayList<Weather> weatherInCurrentCity= searching.searchByCity(main.askForCity());
+               if(weatherInCurrentCity.size()!=0){
+                   getMessage(weatherInCurrentCity.toString());}
+               else{
+                   getMessage("Данных по такому городу нет");
+               }
                break;
             case 2:
-
+                HashSet<City> cities = searching.searchByTemperatureRange(main.askForTempMin(),main.askForTempMax());
+                if(cities.size()!=0){
+                    getMessage(cities.toString());
+                }else{
+                    getMessage("Городов с таким диапазоном температур не найдено");
+                }
+                break;
+            case 3:
+                Main.goodByeMessage();
+                break;
+            default:
+                getMessage("Неверный ввод!");
         }
-
-
 
     }
 
 
     @Override
-    public void getProblem(String problem) {
-        main.printMessages(problem);
+    public void getMessage(String message) {
+        main.printMessages(message);
     }
+
 }
