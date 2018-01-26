@@ -9,48 +9,91 @@ import java.io.InputStreamReader;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
 
-        Manager manager = Manager.getInstance();
-        Scanner scanner = new Scanner(System.in);
+   private static Scanner scanner = new Scanner(System.in);
+   private static Manager manager = Manager.getInstance();
+
+    public static void main(String[] args) {
 
         System.out.printf("\n\t\tДОБРО ПОЖАЛОВАТЬ!\nВведите:\n1- чтобы скачать и распарсить XML\n2- чтобы скачать и распарсить JSON" +
                 "\n3- чтобы выйти\nОтвет: ");
-
         manager.downloadingAndParsing(scanner.nextInt());
+        startMenu();
 
-        System.out.printf("\n\t\tМЕНЮ\nВведите:\n1- если хотите вывести погоду на экран\n2- если хотите осуществить поиск" +
-                "\n3- если хотите отсортировать данные\n4- если хотите получить средннюю или максимальную температуру по региону" +
+
+    }
+
+    /**
+     * Input and output for MENU
+     */
+    public static void startMenu(){
+        System.out.printf("\n\t\tМЕНЮ\nВведите:" +
+                "\n1- если хотите вывести погоду на экран" +
+                "\n2- если хотите осуществить поиск" +
+                "\n3- если хотите отсортировать данные" +
+                "\n4- если хотите получить средннюю или максимальную температуру по региону" +
                 "\n5- чтобы выйти\nОтвет: ");
         int choiceOne = scanner.nextInt();
         switch (choiceOne) {
             case 1:
-                System.out.printf("\n\t\tВЫВОД ПОГОДЫ НА ЭКРАН\nВведите:\n1- чтобы вывести погоду за весь период" +
-                        "\n2- чтобы вывести погоду за определенную дату" +
-                        "\n3- чтобы вывести погоду за период\n4- чтобы выйти\nОтвет: ");
-                manager.showRootAccordingDates(scanner.nextInt());
+                outputWeatherUI();
                 break;
             case 2:
-                System.out.printf("\n\t\tПОИСК\nВведите:\n1- поиск по определенному городу" +
-                        "\n2- поиск городов по диапазону температур\n3- чтобы выйти\nОтвет: ");
-                manager.searching(scanner.nextInt());
+                searchUI();
                 break;
             case 3:
-                System.out.printf("\n\t\tСОРТИРОВКА ДАННЫХ\nВведите:\n1- чтобы сортировать данные по влажности" +
-                        "\n2- чтобы сортировать данные по максимальной температуре" +
-                        "\n3- чтобы сортировать данные по минимальной температуре\n4- чтобы выйти\nОтвет: ");
-                manager.sorting(scanner.nextInt());
+                sortUI();
                 break;
             case 4:
                 //написать логику
                 break;
             case 5:
                 goodByeMessage();
+                break;
+            default:
+                System.out.println("Неверный ввод! Попробуйте еще раз");
+               startMenu();
+                break;
 
         }
-
-
     }
+
+    /**
+     * Input and output for WEATHER OUTPUT
+     */
+    public static void outputWeatherUI(){
+        System.out.printf("\n\t\tВЫВОД ПОГОДЫ НА ЭКРАН\nВведите:\n1- чтобы вывести погоду за весь период" +
+                "\n2- чтобы вывести погоду за определенную дату" +
+                "\n3- чтобы вывести погоду за период" +
+                "\n4- чтобы вернуть назад к МЕНЮ"+
+                "\n5- чтобы выйти\nОтвет: ");
+        manager.showRootAccordingDates(scanner.nextInt());
+    }
+
+    /**
+     * Input and output for SEARCH
+     */
+    public static void searchUI(){
+        System.out.printf("\n\t\tПОИСК\nВведите:\n1- поиск по определенному городу" +
+                "\n2- поиск городов по диапазону температур" +
+                "\n3- чтобы вернуть назад к МЕНЮ"+
+                "\n4- чтобы выйти" +
+                "\nОтвет: ");
+        manager.searching(scanner.nextInt());
+    }
+
+    /**
+     * Input and output for SORT
+     */
+    public static void sortUI(){
+        System.out.printf("\n\t\tСОРТИРОВКА ДАННЫХ\nВведите:\n1- чтобы сортировать данные по влажности" +
+                "\n2- чтобы сортировать данные по максимальной температуре" +
+                "\n3- чтобы сортировать данные по минимальной температуре" +
+                "\n4- чтобы вернуть назад к МЕНЮ"+
+                "\n5- чтобы выйти\nОтвет: ");
+        manager.sorting(scanner.nextInt());
+    }
+
 
     /**
      * Ask user to print name of City for Searching by city
@@ -102,6 +145,18 @@ public class Main {
             System.out.println(e.getMessage());
         }
         return dateToFind;
+    }
+
+
+    public void askForRepeat(){
+        System.out.printf("\nХотите вернуться в МЕНЮ? Введите:" +
+                "\n1 - Да\n2- Нет\nОтвет:");
+        if(scanner.nextInt()==1){
+            startMenu();
+        }else{
+            goodByeMessage();
+        }
+
     }
 
 

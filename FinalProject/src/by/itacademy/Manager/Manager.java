@@ -16,7 +16,6 @@ import by.itacademy.Sorting.SortingMyTempMin;
 import by.itacademy.WeatherByDates.WeatherByDates;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
 
@@ -86,6 +85,96 @@ public class Manager implements Listener {
         }
     }
 
+
+    /**
+     * Method for showing data
+     * according to the User's choice
+     *
+     * @param choice int
+     */
+    public void showRootAccordingDates(int choice){
+        Root currentRoot;
+        WeatherByDates weatherByDates = new WeatherByDates(root);
+        switch (choice){
+            case 1:
+                getMessage(root.toString());
+                main.askForRepeat();
+                break;
+            case 2:
+                currentRoot = weatherByDates.showWeatherByDates(main.askForData());
+                if(currentRoot.getWeatherList().size()!=0){
+                    getMessage(currentRoot.toString());
+                }else{
+                    getMessage("По это дате ничего не найдено!");
+                }
+                main.askForRepeat();
+                break;
+            case 3:
+                currentRoot = weatherByDates.showWeatherByDates(main.askForData(),main.askForData());
+               if(currentRoot.getWeatherList().size()!=0){
+                getMessage(currentRoot.toString());}
+                else{
+                   getMessage("За этот период ничего не найдено!");
+               }
+                main.askForRepeat();
+                break;
+            case 4:
+                Main.startMenu();
+                break;
+            case 5:
+                Main.goodByeMessage();
+                break;
+            default:
+                getMessage("Неверный ввод! Попробуйте еще раз!");
+                Main.outputWeatherUI();
+                break;
+        }
+
+    }
+
+    /**
+     * Method for searching data
+     * according to the User's choice
+     * @param choice int
+     */
+    public void searching(int choice) {
+        Searching searching = new Searching(root);
+        switch (choice) {
+            case 1:
+                Root currentRoot = searching.searchByCity(main.askForCity());
+                if (currentRoot.getWeatherList().size() != 0) {
+                    getMessage(currentRoot.toString());
+                } else {
+                    getMessage("Данных по такому городу нет");
+                }
+                main.askForRepeat();
+                break;
+            case 2:
+                HashSet<City> cities = searching.searchByTemperatureRange(main.askForTempMin(), main.askForTempMax());
+                if (cities.size() != 0) {
+                    getMessage(cities.toString());
+                } else {
+                    getMessage("Городов с таким диапазоном температур не найдено! Попробуйте еще раз!");
+                    Main.searchUI();
+                    break;
+                }
+                main.askForRepeat();
+                break;
+            case 3:
+                Main.startMenu();
+                break;
+            case 4:
+                Main.goodByeMessage();
+                break;
+            default:
+                getMessage("Неверный ввод! Попробуйте еще раз!");
+                Main.searchUI();
+                break;
+        }
+
+    }
+
+
     /**
      * Method for sorting data
      * according to the User's choice
@@ -105,67 +194,24 @@ public class Manager implements Listener {
                 weatherComparator = new SortingMyTempMin();
                 break;
             case 4:
+                Main.startMenu();
+                return;
+            case 5:
                 Main.goodByeMessage();
                 return;
             default:
-                getMessage("Неверный ввод!");
+                getMessage("Неверный ввод! Попробуйте еще раз");
+                Main.sortUI();
                 return;
         }
         root.getWeatherList().sort(weatherComparator);
         getMessage(root.toString());
+        main.askForRepeat();
     }
 
-    public void searching(int choice) {
-        Searching searching = new Searching(root);
-        switch (choice) {
-            case 1:
-                Root currentRoot = searching.searchByCity(main.askForCity());
-                if (currentRoot.getWeatherList().size() != 0) {
-                    getMessage(currentRoot.toString());
-                } else {
-                    getMessage("Данных по такому городу нет");
-                }
-                break;
-            case 2:
-                HashSet<City> cities = searching.searchByTemperatureRange(main.askForTempMin(), main.askForTempMax());
-                if (cities.size() != 0) {
-                    getMessage(cities.toString());
-                } else {
-                    getMessage("Городов с таким диапазоном температур не найдено");
-                }
-                break;
-            case 3:
-                Main.goodByeMessage();
-                break;
-            default:
-                getMessage("Неверный ввод!");
-        }
 
-    }
 
-    public void showRootAccordingDates(int choice){
-        Root currentRoot;
-        WeatherByDates weatherByDates = new WeatherByDates(root);
-        switch (choice){
-            case 1:
-                getMessage(root.toString());
-                break;
-            case 2:
-                currentRoot = weatherByDates.showWeatherByDates(main.askForData());
-                getMessage(currentRoot.toString());
-                break;
-            case 3:
-                currentRoot = weatherByDates.showWeatherByDates(main.askForData(),main.askForData());
-                getMessage(currentRoot.toString());
-                break;
-            case 4:
-                Main.goodByeMessage();
-                break;
-            default:
-                getMessage("Неверный ввод!");
-        }
 
-    }
 
 
     @Override
