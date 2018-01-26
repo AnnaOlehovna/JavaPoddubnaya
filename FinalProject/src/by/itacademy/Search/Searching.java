@@ -40,18 +40,23 @@ public class Searching {
      * @param nameCity name of the searching city
      * @return Weather that contains asked city
      */
-    public ArrayList<Weather> searchByCity(String nameCity) {
+    public Root searchByCity(String nameCity) {
+        Root rootOnRequest = new Root();
         ArrayList<Weather> weatherForCity = new ArrayList<>();
         for (int i = 0; i < root.getWeatherList().size() ; i++) {
             Weather weather = root.getWeatherList().get(i);
             for(HashMap.Entry<String, List<City>> entry :weather.getLocation().entrySet()){
                 for(City city: entry.getValue()){
-                    if(city.getName().equals(nameCity)){
+                    if(city.getName().toLowerCase().equals(nameCity.toLowerCase())){
                         weatherForCity.add(weather);
                     }
                 }
             }
         }
-        return weatherForCity;
+        rootOnRequest.setDate(root.getDate());
+        rootOnRequest.setName(root.getName());
+        rootOnRequest.setWeatherList(weatherForCity);
+
+        return rootOnRequest;
     }
 }

@@ -13,6 +13,7 @@ import by.itacademy.Search.Searching;
 import by.itacademy.Sorting.SortingByHumidity;
 import by.itacademy.Sorting.SortingByTempMax;
 import by.itacademy.Sorting.SortingMyTempMin;
+import by.itacademy.WeatherByDates.WeatherByDates;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -46,6 +47,7 @@ public class Manager implements Listener {
     /**
      * Method for downloading and parsing files
      * according to the User's choice
+     *
      * @param choice int
      */
     public void downloadingAndParsing(int choice) {
@@ -57,10 +59,12 @@ public class Manager implements Listener {
                 case 1:
                     downloader.download(LINK_XML);
                     parsing = new ParseXML();
+                    getMessage("Загрузка и парсинг XML прошли успешно!");
                     break;
                 case 2:
                     downloader.download(LINK_JSON);
                     parsing = new ParseJSON();
+                    getMessage("Загрузка и парсинг JSON прошли успешно!");
                     break;
                 case 3:
                     Main.goodByeMessage();
@@ -71,20 +75,21 @@ public class Manager implements Listener {
 
             }
             file = downloader.getFile();
-           root=parsing.parsingFile(file);
+            root = parsing.parsingFile(file);
         });
-
+        myThread.setName("My Thread");
         myThread.start();
         try {
             myThread.join();
         } catch (InterruptedException e) {
-            getMessage("My Thread was interrupted");
+            getMessage(Thread.currentThread().getName()+"was interrupted");
         }
     }
 
     /**
      * Method for sorting data
      * according to the User's choice
+     *
      * @param choice int
      */
     public void sorting(int choice) {
@@ -110,26 +115,50 @@ public class Manager implements Listener {
         getMessage(root.toString());
     }
 
-    public void searching(int choice){
+    public void searching(int choice) {
         Searching searching = new Searching(root);
-        switch (choice){
+        switch (choice) {
             case 1:
-                ArrayList<Weather> weatherInCurrentCity= searching.searchByCity(main.askForCity());
-               if(weatherInCurrentCity.size()!=0){
-                   getMessage(weatherInCurrentCity.toString());}
-               else{
-                   getMessage("Данных по такому городу нет");
-               }
-               break;
+                Root currentRoot = searching.searchByCity(main.askForCity());
+                if (currentRoot.getWeatherList().size() != 0) {
+                    getMessage(currentRoot.toString());
+                } else {
+                    getMessage("Данных по такому городу нет");
+                }
+                break;
             case 2:
-                HashSet<City> cities = searching.searchByTemperatureRange(main.askForTempMin(),main.askForTempMax());
-                if(cities.size()!=0){
+                HashSet<City> cities = searching.searchByTemperatureRange(main.askForTempMin(), main.askForTempMax());
+                if (cities.size() != 0) {
                     getMessage(cities.toString());
-                }else{
+                } else {
                     getMessage("Городов с таким диапазоном температур не найдено");
                 }
                 break;
             case 3:
+                Main.goodByeMessage();
+                break;
+            default:
+                getMessage("Неверный ввод!");
+        }
+
+    }
+
+    public void showRootAccordingDates(int choice){
+        Root currentRoot;
+        WeatherByDates weatherByDates = new WeatherByDates(root);
+        switch (choice){
+            case 1:
+                getMessage(root.toString());
+                break;
+            case 2:
+                currentRoot = weatherByDates.showWeatherByDates(main.askForData());
+                getMessage(currentRoot.toString());
+                break;
+            case 3:
+                currentRoot = weatherByDates.showWeatherByDates(main.askForData(),main.askForData());
+                getMessage(currentRoot.toString());
+                break;
+            case 4:
                 Main.goodByeMessage();
                 break;
             default:
