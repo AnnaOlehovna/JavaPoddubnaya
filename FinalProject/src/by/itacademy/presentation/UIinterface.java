@@ -30,6 +30,9 @@ public interface UIInterface {
      */
     void tempInRegionUI();
 
+    /**
+     * Print goodByeMessage
+     */
     void goodByeMessage();
 
     /**
@@ -56,6 +59,9 @@ public interface UIInterface {
      */
     String askForData();
 
+    /**
+     * Ask user if he wants to repeat and recall MENU
+     */
     void askForRepeat();
 
 
