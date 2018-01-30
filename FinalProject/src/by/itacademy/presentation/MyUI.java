@@ -41,7 +41,7 @@ public class MyUI implements UIInterface {
                 sortUI();
                 break;
             case "4":
-                //написать логику
+                tempInRegionUI();
                 break;
             case "5":
                 goodByeMessage();
@@ -59,7 +59,7 @@ public class MyUI implements UIInterface {
         System.out.printf("\n\t\tВЫВОД ПОГОДЫ НА ЭКРАН\nВведите:\n1- чтобы вывести погоду за весь период" +
                 "\n2- чтобы вывести погоду за определенную дату" +
                 "\n3- чтобы вывести погоду за период" +
-                "\n4- чтобы вернуть назад к МЕНЮ"+
+                "\n4- чтобы вернуть назад к МЕНЮ" +
                 "\n5- чтобы выйти\nОтвет: ");
         Manager.getInstance().showRootAccordingDates(scanner.next());
     }
@@ -68,7 +68,7 @@ public class MyUI implements UIInterface {
     public void searchUI() {
         System.out.printf("\n\t\tПОИСК\nВведите:\n1- поиск по определенному городу" +
                 "\n2- поиск городов по диапазону температур" +
-                "\n3- чтобы вернуть назад к МЕНЮ"+
+                "\n3- чтобы вернуть назад к МЕНЮ" +
                 "\n4- чтобы выйти" +
                 "\nОтвет: ");
         Manager.getInstance().searching(scanner.next());
@@ -80,21 +80,27 @@ public class MyUI implements UIInterface {
         System.out.printf("\n\t\tСОРТИРОВКА ДАННЫХ\nВведите:\n1- чтобы сортировать данные по влажности" +
                 "\n2- чтобы сортировать данные по максимальной температуре" +
                 "\n3- чтобы сортировать данные по минимальной температуре" +
-                "\n4- чтобы вернуть назад к МЕНЮ"+
+                "\n4- чтобы вернуть назад к МЕНЮ" +
                 "\n5- чтобы выйти\nОтвет: ");
         Manager.getInstance().sorting(scanner.next());
     }
 
+
+    @Override
+    public void tempInRegionUI() {
+        System.out.printf("\n\t\tТЕМПЕРАТУРА ПО РЕГИОНУ\nВведите:\n1- чтобы узнать максимальную температуру по каждому региону" +
+                "\n2- чтобы узнать среднюю температуру по каждому региону" +
+                "\n3- чтобы вернуть назад к МЕНЮ" +
+                "\n4- чтобы выйти" +
+                "\nОтвет: ");
+        Manager.getInstance().tempInRegion(scanner.next());
+    }
 
     public void goodByeMessage() {
         System.out.printf("ВСЕГО ДОБРОГО!");
     }
 
 
-    /**
-     * Ask user to print name of City for Searching by city
-     * @return String with name of the city
-     */
     public String askForCity() {
         System.out.println("Введите название города для поиска информации. Например: Minsk");
         String cityToFind = "";
@@ -107,30 +113,21 @@ public class MyUI implements UIInterface {
         return cityToFind;
     }
 
-    /**
-     * Ask user to print MIN temperature for Searching
-     * by temperature range
-     */
+
     public int askForTempMin() {
         System.out.println("Введите МИНимальную температуру");
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
     }
 
-    /**
-     * Ask user to print MAX temperature for Searching
-     * by temperature range
-     */
+
     public int askForTempMax() {
         System.out.println("Введите МАКСимальную температуру");
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
     }
 
-    /**
-     * Ask user to print date to show information on this date
-     * @return String with date
-     */
+
     public String askForData() {
         System.out.println("Введите дату в формате дд-мм-гггг. Например: 22-10-2015");
         String dateToFind = "";
@@ -144,16 +141,21 @@ public class MyUI implements UIInterface {
     }
 
 
-    public void askForRepeat(){
+    public void askForRepeat() {
         System.out.printf("\nХотите вернуться в МЕНЮ? Введите:" +
-                "\n1 - Да\n2- Нет\nОтвет:");
-        if(scanner.next().equals("1")){
-            Menu();
-        }else if (scanner.next().equals("2")){
-            goodByeMessage();
-        }else{
-            System.out.printf("\nНеверный ввод! Попробуйте еще раз!");
-            askForRepeat();
+                "\n1- Да\n2- Нет\nОтвет:");
+        String choice = scanner.next();
+        switch (choice) {
+            case "1":
+                Menu();
+                break;
+            case "2":
+                goodByeMessage();
+                break;
+            default:
+                System.out.printf("\nНеверный ввод! Попробуйте еще раз!");
+                askForRepeat();
+                break;
         }
 
     }

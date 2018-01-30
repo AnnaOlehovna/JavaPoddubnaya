@@ -25,6 +25,11 @@ public interface UIInterface {
      */
     void sortUI();
 
+    /**
+     * Input and output for Showing temperature in Region
+     */
+    void tempInRegionUI();
+
     void goodByeMessage();
 
     /**

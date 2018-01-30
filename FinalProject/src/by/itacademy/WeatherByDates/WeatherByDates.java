@@ -49,8 +49,8 @@ public class WeatherByDates {
         ArrayList<Weather> weathers = new ArrayList<>();
 
         for (Weather weather : root.getWeatherList()) {
-            if (dateStart.before(weather.getDate()) || dateStart.equals(weather.getDate()) &&
-                    dateEnd.after(weather.getDate()) || dateEnd.equals(weather.getDate())) {
+            if (dateStart.before(weather.getDate())  &&
+                    dateEnd.after(weather.getDate())) {
                 weathers.add(weather);
             }
         }

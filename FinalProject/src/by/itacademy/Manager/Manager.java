@@ -14,6 +14,7 @@ import by.itacademy.search.Searching;
 import by.itacademy.sorting.SortingByHumidity;
 import by.itacademy.sorting.SortingByTempMax;
 import by.itacademy.sorting.SortingMyTempMin;
+import by.itacademy.tempInRegion.TempInRegion;
 import by.itacademy.weatherByDates.WeatherByDates;
 
 import java.io.File;
@@ -59,13 +60,11 @@ public class Manager implements Listener {
                     downloader.download(LINK_XML);
                     parsing = new ParseXML();
                     getMessage("Загрузка и парсинг XML прошли успешно!");
-                    UI.Menu();
                     break;
                 case "2":
                     downloader.download(LINK_JSON);
                     parsing = new ParseJSON();
                     getMessage("Загрузка и парсинг JSON прошли успешно!");
-                    UI.Menu();
                     break;
                 case "3":
                     UI.goodByeMessage();
@@ -86,6 +85,8 @@ public class Manager implements Listener {
         } catch (InterruptedException e) {
             getMessage(Thread.currentThread().getName()+"was interrupted");
         }
+
+        UI.Menu();
     }
 
 
@@ -100,7 +101,6 @@ public class Manager implements Listener {
         switch (choice){
             case "1":
                 getMessage(root.toString());
-                UI.askForRepeat();
                 break;
             case "2":
                 currentRoot = weatherByDates.showWeatherByDates(UI.askForData());
@@ -109,7 +109,6 @@ public class Manager implements Listener {
                 }else{
                     getMessage("По это дате ничего не найдено!");
                 }
-                UI.askForRepeat();
                 break;
             case "3":
                 currentRoot = weatherByDates.showWeatherByDates(UI.askForData(),UI.askForData());
@@ -118,19 +117,19 @@ public class Manager implements Listener {
                 else{
                    getMessage("За этот период ничего не найдено!");
                }
-                UI.askForRepeat();
                 break;
             case "4":
                 UI.Menu();
-                break;
+                return;
             case "5":
                 UI.goodByeMessage();
-                break;
+                return;
             default:
                 getMessage("Неверный ввод! Попробуйте еще раз!");
                 UI.outputWeatherUI();
-                break;
+                return;
         }
+        UI.askForRepeat();
 
     }
 
@@ -149,7 +148,6 @@ public class Manager implements Listener {
                 } else {
                     getMessage("Данных по такому городу нет");
                 }
-                UI.askForRepeat();
                 break;
             case "2":
                 HashSet<City> cities = searching.searchByTemperatureRange(UI.askForTempMin(), UI.askForTempMax());
@@ -158,21 +156,21 @@ public class Manager implements Listener {
                 } else {
                     getMessage("Городов с таким диапазоном температур не найдено! Попробуйте еще раз!");
                     UI.searchUI();
-                    break;
+                    return;
                 }
-                UI.askForRepeat();
                 break;
             case "3":
                 UI.Menu();
-                break;
+                return;
             case "4":
                 UI.goodByeMessage();
-                break;
+                return;
             default:
                 getMessage("Неверный ввод! Попробуйте еще раз!");
                 UI.searchUI();
-                break;
+                return;
         }
+        UI.askForRepeat();
 
     }
 
@@ -208,6 +206,32 @@ public class Manager implements Listener {
         root.getWeatherList().sort(weatherComparator);
         getMessage(root.toString());
         UI.askForRepeat();
+    }
+
+
+    public void tempInRegion(String choice){
+        TempInRegion tempInRegion=new TempInRegion(root);
+        switch (choice){
+            case "1":
+                UI.printMessages(tempInRegion.maxTemp().toString());
+                break;
+            case "2":
+                UI.printMessages(tempInRegion.averageTemp().toString());
+                break;
+            case "3":
+                UI.Menu();
+                return;
+            case "4":
+                UI.goodByeMessage();
+                return;
+            default:
+                getMessage("Неверный ввод! Попробуйте еще раз");
+                UI.tempInRegionUI();
+                return;
+
+        }
+        UI.askForRepeat();
+
     }
 
 
