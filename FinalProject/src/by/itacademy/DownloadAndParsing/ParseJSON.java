@@ -31,6 +31,7 @@ public class ParseJSON extends EventManager implements Parsing {
 
     @Override
     public Root parsingFile(File file) {
+        if(file!=null){
             Root root = new Root();
             JSONParser parser = new JSONParser();
 
@@ -117,7 +118,9 @@ public class ParseJSON extends EventManager implements Parsing {
             }
             return root;
         }
-
-
+    else{
+        return null;
+    }
+}
 }
 

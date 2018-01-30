@@ -21,7 +21,8 @@ public class Downloader extends EventManager  {
         this.file = file;
     }
 
-    public void download(String link) {
+    public boolean download(String link) {
+        boolean isDownloaded = false;
         String filePath ="";
 
         InputStream inputStream = null;
@@ -54,13 +55,14 @@ public class Downloader extends EventManager  {
                 while ((byteRead = inputStream.read(buffer)) != -1) {
                     fileOutputStream.write(buffer, 0, byteRead);
                 }
+                isDownloaded = true;
             } else {
                 sendMessage("Данные не найдены, response code = " + responseCode);
 
             }
 
         } catch (Exception e) {
-            sendMessage("Невозможно скачать файл. Ошибка " + e.toString());
+            sendMessage("Невозможно скачать файл. Проверьте подключение к интернету! ");
         } finally {
             if (inputStream != null && fileOutputStream != null) {
 
@@ -78,6 +80,7 @@ public class Downloader extends EventManager  {
             }
 
         }
+        return isDownloaded;
 
     }
 

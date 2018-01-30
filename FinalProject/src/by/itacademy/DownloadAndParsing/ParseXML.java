@@ -27,6 +27,7 @@ public class ParseXML extends EventManager implements Parsing {
 
 
     public Root parsingFile(File file) {
+        if(file!=null){
         Root root = new Root();
         Document dom;
 
@@ -119,6 +120,9 @@ public class ParseXML extends EventManager implements Parsing {
         }
         root.setWeatherList(weatherList);
         return root;
+    }else{
+         return null;
+        }
     }
 
 

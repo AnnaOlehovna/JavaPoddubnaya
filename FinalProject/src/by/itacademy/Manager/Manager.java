@@ -55,16 +55,29 @@ public class Manager implements Listener {
             Downloader downloader = new Downloader();
             Parsing parsing;
             File file;
+            String filepath=null;
             switch (choice) {
                 case "1":
-                    downloader.download(LINK_XML);
+                    if(downloader.download(LINK_XML)){
+                        getMessage("Загрузка прошла успешно");
+                    }else{
+                        getMessage("Проверка наличия файлак локально");
+                    }
+                    if(new File("weather.xml").exists()){
+                        filepath="weather.xml";
+                    }
                     parsing = new ParseXML();
-                    getMessage("Загрузка и парсинг XML прошли успешно!");
                     break;
                 case "2":
-                    downloader.download(LINK_JSON);
+                    if(downloader.download(LINK_JSON)){
+                        getMessage("Загрузка прошла успешно");
+                    }else{
+                        getMessage("Проверка наличия файла локально");
+                    }
+                    if(new File("weather.json").exists()){
+                        filepath="weather.json";
+                    }
                     parsing = new ParseJSON();
-                    getMessage("Загрузка и парсинг JSON прошли успешно!");
                     break;
                 case "3":
                     UI.goodByeMessage();
@@ -73,10 +86,15 @@ public class Manager implements Listener {
                     getMessage("Неверный ввод! Попробуйте снова!");
                     UI.startUI();
                     return;
-
             }
-            file = downloader.getFile();
-            root = parsing.parsingFile(file);
+            if (filepath != null) {
+                file =new File(filepath);
+                root = parsing.parsingFile(file);
+            }else {
+                getMessage("Файл не был сохранен локально ранее");
+            }
+
+
         });
         myThread.setName("My Thread");
         myThread.start();
@@ -86,7 +104,11 @@ public class Manager implements Listener {
             getMessage(Thread.currentThread().getName()+"was interrupted");
         }
 
-        UI.Menu();
+        if(root!=null){
+            getMessage("Парсинг прошел успешно!");
+            UI.Menu();
+        }
+
     }
 
 
@@ -107,7 +129,7 @@ public class Manager implements Listener {
                 if(currentRoot.getWeatherList().size()!=0){
                     getMessage(currentRoot.toString());
                 }else{
-                    getMessage("По это дате ничего не найдено!");
+                    getMessage("По этой дате ничего не найдено!");
                 }
                 break;
             case "3":
