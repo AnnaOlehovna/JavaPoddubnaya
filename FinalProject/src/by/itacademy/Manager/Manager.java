@@ -9,7 +9,7 @@ import by.itacademy.entity.City;
 import by.itacademy.entity.Root;
 import by.itacademy.entity.Weather;
 import by.itacademy.presentation.MyUI;
-import by.itacademy.presentation.UIinterface;
+import by.itacademy.presentation.UIInterface;
 import by.itacademy.search.Searching;
 import by.itacademy.sorting.SortingByHumidity;
 import by.itacademy.sorting.SortingByTempMax;
@@ -24,7 +24,7 @@ public class Manager implements Listener {
     private final String LINK_XML = "http://kiparo.ru/t/weather.xml";
     private final String LINK_JSON = "http://kiparo.ru/t/weather.json";
 
-    private UIinterface UI = new MyUI();
+    private UIInterface UI = new MyUI();
     private static Manager instance = new Manager();
     private Root root;
 
@@ -47,30 +47,32 @@ public class Manager implements Listener {
     /**
      * Method for downloading and parsing files
      * according to the User's choice
-     *
-     * @param choice int
+     * @param choice String
      */
-    public void downloadingAndParsing(int choice) {
+    public void downloadingAndParsing(String choice) {
         Thread myThread = new Thread(() -> {
             Downloader downloader = new Downloader();
             Parsing parsing;
             File file;
             switch (choice) {
-                case 1:
+                case "1":
                     downloader.download(LINK_XML);
                     parsing = new ParseXML();
                     getMessage("Загрузка и парсинг XML прошли успешно!");
+                    UI.Menu();
                     break;
-                case 2:
+                case "2":
                     downloader.download(LINK_JSON);
                     parsing = new ParseJSON();
                     getMessage("Загрузка и парсинг JSON прошли успешно!");
+                    UI.Menu();
                     break;
-                case 3:
+                case "3":
                     UI.goodByeMessage();
                     return;
                 default:
-                    getMessage("Неверный ввод!");
+                    getMessage("Неверный ввод! Попробуйте снова!");
+                    UI.startUI();
                     return;
 
             }
@@ -90,18 +92,17 @@ public class Manager implements Listener {
     /**
      * Method for showing data
      * according to the User's choice
-     *
-     * @param choice int
+     * @param choice String
      */
-    public void showRootAccordingDates(int choice){
+    public void showRootAccordingDates(String choice){
         Root currentRoot;
         WeatherByDates weatherByDates = new WeatherByDates(root);
         switch (choice){
-            case 1:
+            case "1":
                 getMessage(root.toString());
                 UI.askForRepeat();
                 break;
-            case 2:
+            case "2":
                 currentRoot = weatherByDates.showWeatherByDates(UI.askForData());
                 if(currentRoot.getWeatherList().size()!=0){
                     getMessage(currentRoot.toString());
@@ -110,7 +111,7 @@ public class Manager implements Listener {
                 }
                 UI.askForRepeat();
                 break;
-            case 3:
+            case "3":
                 currentRoot = weatherByDates.showWeatherByDates(UI.askForData(),UI.askForData());
                if(currentRoot.getWeatherList().size()!=0){
                 getMessage(currentRoot.toString());}
@@ -119,10 +120,10 @@ public class Manager implements Listener {
                }
                 UI.askForRepeat();
                 break;
-            case 4:
+            case "4":
                 UI.Menu();
                 break;
-            case 5:
+            case "5":
                 UI.goodByeMessage();
                 break;
             default:
@@ -136,12 +137,12 @@ public class Manager implements Listener {
     /**
      * Method for searching data
      * according to the User's choice
-     * @param choice int
+     * @param choice String
      */
-    public void searching(int choice) {
+    public void searching(String choice) {
         Searching searching = new Searching(root);
         switch (choice) {
-            case 1:
+            case "1":
                 Root currentRoot = searching.searchByCity(UI.askForCity());
                 if (currentRoot.getWeatherList().size() != 0) {
                     getMessage(currentRoot.toString());
@@ -150,7 +151,7 @@ public class Manager implements Listener {
                 }
                 UI.askForRepeat();
                 break;
-            case 2:
+            case "2":
                 HashSet<City> cities = searching.searchByTemperatureRange(UI.askForTempMin(), UI.askForTempMax());
                 if (cities.size() != 0) {
                     getMessage(cities.toString());
@@ -161,10 +162,10 @@ public class Manager implements Listener {
                 }
                 UI.askForRepeat();
                 break;
-            case 3:
+            case "3":
                 UI.Menu();
                 break;
-            case 4:
+            case "4":
                 UI.goodByeMessage();
                 break;
             default:
@@ -179,25 +180,24 @@ public class Manager implements Listener {
     /**
      * Method for sorting data
      * according to the User's choice
-     *
-     * @param choice int
+     * @param choice String
      */
-    public void sorting(int choice) {
+    public void sorting(String choice) {
         Comparator<Weather> weatherComparator;
         switch (choice) {
-            case 1:
+            case "1":
                 weatherComparator = new SortingByHumidity();
                 break;
-            case 2:
+            case "2":
                 weatherComparator = new SortingByTempMax();
                 break;
-            case 3:
+            case "3":
                 weatherComparator = new SortingMyTempMin();
                 break;
-            case 4:
+            case "4":
                 UI.Menu();
                 return;
-            case 5:
+            case "5":
                 UI.goodByeMessage();
                 return;
             default:

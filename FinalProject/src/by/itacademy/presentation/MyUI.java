@@ -7,17 +7,18 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Scanner;
 
-public class MyUI implements UIinterface {
+public class MyUI implements UIInterface {
 
-    Scanner scanner = new Scanner(System.in);
+    private Scanner scanner = new Scanner(System.in);
 
     @Override
     public void startUI() {
 
         System.out.printf("\n\t\tДОБРО ПОЖАЛОВАТЬ!\nВведите:\n1- чтобы скачать и распарсить XML\n2- чтобы скачать и распарсить JSON" +
                 "\n3- чтобы выйти\nОтвет: ");
-        Manager.getInstance().downloadingAndParsing(scanner.nextInt());
-        Menu();
+
+        Manager.getInstance().downloadingAndParsing(scanner.next());
+
     }
 
     @Override
@@ -28,21 +29,21 @@ public class MyUI implements UIinterface {
                 "\n3- если хотите отсортировать данные" +
                 "\n4- если хотите получить средннюю или максимальную температуру по региону" +
                 "\n5- чтобы выйти\nОтвет: ");
-        int choiceOne = scanner.nextInt();
+        String choiceOne = scanner.next();
         switch (choiceOne) {
-            case 1:
+            case "1":
                 outputWeatherUI();
                 break;
-            case 2:
+            case "2":
                 searchUI();
                 break;
-            case 3:
+            case "3":
                 sortUI();
                 break;
-            case 4:
+            case "4":
                 //написать логику
                 break;
-            case 5:
+            case "5":
                 goodByeMessage();
                 break;
             default:
@@ -60,7 +61,7 @@ public class MyUI implements UIinterface {
                 "\n3- чтобы вывести погоду за период" +
                 "\n4- чтобы вернуть назад к МЕНЮ"+
                 "\n5- чтобы выйти\nОтвет: ");
-        Manager.getInstance().showRootAccordingDates(scanner.nextInt());
+        Manager.getInstance().showRootAccordingDates(scanner.next());
     }
 
     @Override
@@ -70,7 +71,7 @@ public class MyUI implements UIinterface {
                 "\n3- чтобы вернуть назад к МЕНЮ"+
                 "\n4- чтобы выйти" +
                 "\nОтвет: ");
-        Manager.getInstance().searching(scanner.nextInt());
+        Manager.getInstance().searching(scanner.next());
 
     }
 
@@ -81,7 +82,7 @@ public class MyUI implements UIinterface {
                 "\n3- чтобы сортировать данные по минимальной температуре" +
                 "\n4- чтобы вернуть назад к МЕНЮ"+
                 "\n5- чтобы выйти\nОтвет: ");
-        Manager.getInstance().sorting(scanner.nextInt());
+        Manager.getInstance().sorting(scanner.next());
     }
 
 
@@ -146,10 +147,13 @@ public class MyUI implements UIinterface {
     public void askForRepeat(){
         System.out.printf("\nХотите вернуться в МЕНЮ? Введите:" +
                 "\n1 - Да\n2- Нет\nОтвет:");
-        if(scanner.nextInt()==1){
+        if(scanner.next().equals("1")){
             Menu();
-        }else{
+        }else if (scanner.next().equals("2")){
             goodByeMessage();
+        }else{
+            System.out.printf("\nНеверный ввод! Попробуйте еще раз!");
+            askForRepeat();
         }
 
     }

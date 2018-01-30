@@ -2,7 +2,7 @@ package by.itacademy.presentation;
 
 import by.itacademy.manager.Manager;
 
-public interface UIinterface {
+public interface UIInterface {
 
     Manager manager = Manager.getInstance();
 
