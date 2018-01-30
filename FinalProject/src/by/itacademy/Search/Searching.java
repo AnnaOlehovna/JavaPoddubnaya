@@ -1,8 +1,8 @@
-package by.itacademy.Search;
+package by.itacademy.search;
 
-import by.itacademy.Entity.City;
-import by.itacademy.Entity.Root;
-import by.itacademy.Entity.Weather;
+import by.itacademy.entity.City;
+import by.itacademy.entity.Root;
+import by.itacademy.entity.Weather;
 
 import java.util.*;
 

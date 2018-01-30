@@ -1,8 +1,8 @@
-package by.itacademy.WeatherByDates;
+package by.itacademy.weatherByDates;
 
-import by.itacademy.Entity.Root;
-import by.itacademy.Entity.Weather;
-import by.itacademy.Manager.ConvertDate;
+import by.itacademy.entity.Root;
+import by.itacademy.entity.Weather;
+import by.itacademy.convertDate.ConvertDate;
 
 import java.util.ArrayList;
 import java.util.Calendar;

@@ -1,10 +1,10 @@
-package by.itacademy.DownloadAndParsing;
+package by.itacademy.downloadAndParsing;
 
-import by.itacademy.Entity.City;
-import by.itacademy.Entity.Root;
-import by.itacademy.Entity.Weather;
-import by.itacademy.Manager.ConvertDate;
-import by.itacademy.Manager.EventManager;
+import by.itacademy.entity.City;
+import by.itacademy.entity.Root;
+import by.itacademy.entity.Weather;
+import by.itacademy.convertDate.ConvertDate;
+import by.itacademy.manager.EventManager;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -18,7 +18,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Parsing data from XML to Entity
+ * Parsing data from XML to entity
  */
 public class ParseXML extends EventManager implements Parsing {
 

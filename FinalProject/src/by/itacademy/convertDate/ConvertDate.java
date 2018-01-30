@@ -1,5 +1,7 @@
-package by.itacademy.Manager;
+package by.itacademy.convertDate;
 
+
+import by.itacademy.manager.EventManager;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

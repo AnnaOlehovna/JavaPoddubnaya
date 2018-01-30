@@ -1,19 +1,20 @@
-package by.itacademy.Manager;
+package by.itacademy.manager;
 
 
-import by.itacademy.DownloadAndParsing.Downloader;
-import by.itacademy.DownloadAndParsing.ParseJSON;
-import by.itacademy.DownloadAndParsing.ParseXML;
-import by.itacademy.DownloadAndParsing.Parsing;
-import by.itacademy.Entity.City;
-import by.itacademy.Entity.Root;
-import by.itacademy.Entity.Weather;
-import by.itacademy.Presentation.Main;
-import by.itacademy.Search.Searching;
-import by.itacademy.Sorting.SortingByHumidity;
-import by.itacademy.Sorting.SortingByTempMax;
-import by.itacademy.Sorting.SortingMyTempMin;
-import by.itacademy.WeatherByDates.WeatherByDates;
+import by.itacademy.downloadAndParsing.Downloader;
+import by.itacademy.downloadAndParsing.ParseJSON;
+import by.itacademy.downloadAndParsing.ParseXML;
+import by.itacademy.downloadAndParsing.Parsing;
+import by.itacademy.entity.City;
+import by.itacademy.entity.Root;
+import by.itacademy.entity.Weather;
+import by.itacademy.presentation.MyUI;
+import by.itacademy.presentation.UIinterface;
+import by.itacademy.search.Searching;
+import by.itacademy.sorting.SortingByHumidity;
+import by.itacademy.sorting.SortingByTempMax;
+import by.itacademy.sorting.SortingMyTempMin;
+import by.itacademy.weatherByDates.WeatherByDates;
 
 import java.io.File;
 import java.util.Comparator;
@@ -23,7 +24,7 @@ public class Manager implements Listener {
     private final String LINK_XML = "http://kiparo.ru/t/weather.xml";
     private final String LINK_JSON = "http://kiparo.ru/t/weather.json";
 
-    private Main main = new Main();
+    private UIinterface UI = new MyUI();
     private static Manager instance = new Manager();
     private Root root;
 
@@ -66,7 +67,7 @@ public class Manager implements Listener {
                     getMessage("Загрузка и парсинг JSON прошли успешно!");
                     break;
                 case 3:
-                    Main.goodByeMessage();
+                    UI.goodByeMessage();
                     return;
                 default:
                     getMessage("Неверный ввод!");
@@ -98,35 +99,35 @@ public class Manager implements Listener {
         switch (choice){
             case 1:
                 getMessage(root.toString());
-                main.askForRepeat();
+                UI.askForRepeat();
                 break;
             case 2:
-                currentRoot = weatherByDates.showWeatherByDates(main.askForData());
+                currentRoot = weatherByDates.showWeatherByDates(UI.askForData());
                 if(currentRoot.getWeatherList().size()!=0){
                     getMessage(currentRoot.toString());
                 }else{
                     getMessage("По это дате ничего не найдено!");
                 }
-                main.askForRepeat();
+                UI.askForRepeat();
                 break;
             case 3:
-                currentRoot = weatherByDates.showWeatherByDates(main.askForData(),main.askForData());
+                currentRoot = weatherByDates.showWeatherByDates(UI.askForData(),UI.askForData());
                if(currentRoot.getWeatherList().size()!=0){
                 getMessage(currentRoot.toString());}
                 else{
                    getMessage("За этот период ничего не найдено!");
                }
-                main.askForRepeat();
+                UI.askForRepeat();
                 break;
             case 4:
-                Main.startMenu();
+                UI.Menu();
                 break;
             case 5:
-                Main.goodByeMessage();
+                UI.goodByeMessage();
                 break;
             default:
                 getMessage("Неверный ввод! Попробуйте еще раз!");
-                Main.outputWeatherUI();
+                UI.outputWeatherUI();
                 break;
         }
 
@@ -141,34 +142,34 @@ public class Manager implements Listener {
         Searching searching = new Searching(root);
         switch (choice) {
             case 1:
-                Root currentRoot = searching.searchByCity(main.askForCity());
+                Root currentRoot = searching.searchByCity(UI.askForCity());
                 if (currentRoot.getWeatherList().size() != 0) {
                     getMessage(currentRoot.toString());
                 } else {
                     getMessage("Данных по такому городу нет");
                 }
-                main.askForRepeat();
+                UI.askForRepeat();
                 break;
             case 2:
-                HashSet<City> cities = searching.searchByTemperatureRange(main.askForTempMin(), main.askForTempMax());
+                HashSet<City> cities = searching.searchByTemperatureRange(UI.askForTempMin(), UI.askForTempMax());
                 if (cities.size() != 0) {
                     getMessage(cities.toString());
                 } else {
                     getMessage("Городов с таким диапазоном температур не найдено! Попробуйте еще раз!");
-                    Main.searchUI();
+                    UI.searchUI();
                     break;
                 }
-                main.askForRepeat();
+                UI.askForRepeat();
                 break;
             case 3:
-                Main.startMenu();
+                UI.Menu();
                 break;
             case 4:
-                Main.goodByeMessage();
+                UI.goodByeMessage();
                 break;
             default:
                 getMessage("Неверный ввод! Попробуйте еще раз!");
-                Main.searchUI();
+                UI.searchUI();
                 break;
         }
 
@@ -194,19 +195,19 @@ public class Manager implements Listener {
                 weatherComparator = new SortingMyTempMin();
                 break;
             case 4:
-                Main.startMenu();
+                UI.Menu();
                 return;
             case 5:
-                Main.goodByeMessage();
+                UI.goodByeMessage();
                 return;
             default:
                 getMessage("Неверный ввод! Попробуйте еще раз");
-                Main.sortUI();
+                UI.sortUI();
                 return;
         }
         root.getWeatherList().sort(weatherComparator);
         getMessage(root.toString());
-        main.askForRepeat();
+        UI.askForRepeat();
     }
 
 
@@ -216,7 +217,7 @@ public class Manager implements Listener {
 
     @Override
     public void getMessage(String message) {
-        main.printMessages(message);
+        UI.printMessages(message);
     }
 
 }

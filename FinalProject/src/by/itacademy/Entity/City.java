@@ -1,4 +1,4 @@
-package by.itacademy.Entity;
+package by.itacademy.entity;
 
 public class City {
 

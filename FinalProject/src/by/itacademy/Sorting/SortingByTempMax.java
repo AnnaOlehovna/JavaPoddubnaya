@@ -1,6 +1,6 @@
-package by.itacademy.Sorting;
+package by.itacademy.sorting;
 
-import by.itacademy.Entity.Weather;
+import by.itacademy.entity.Weather;
 
 import java.util.Comparator;
 

@@ -1,6 +1,6 @@
-package by.itacademy.DownloadAndParsing;
+package by.itacademy.downloadAndParsing;
 
-import by.itacademy.Manager.EventManager;
+import by.itacademy.manager.EventManager;
 
 import java.io.File;
 import java.io.FileOutputStream;

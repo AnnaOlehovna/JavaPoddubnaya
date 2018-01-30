@@ -1,7 +1,7 @@
-package by.itacademy.Entity;
+package by.itacademy.entity;
 
 
-import by.itacademy.Manager.ConvertDate;
+import by.itacademy.convertDate.ConvertDate;
 
 import java.util.Date;
 import java.util.HashMap;
