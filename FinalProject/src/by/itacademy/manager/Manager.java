@@ -59,9 +59,9 @@ public class Manager implements Listener {
             switch (choice) {
                 case "1":
                     if(downloader.download(LINK_XML)){
-                        getMessage("Загрузка прошла успешно");
+                        getMessage("Загрузка прошла успешно!");
                     }else{
-                        getMessage("Проверка наличия файла локально");
+                        getMessage("Проверка наличия копии файла локально");
                     }
                     if(new File("weather.xml").exists()){
                         filepath="weather.xml";
@@ -70,9 +70,9 @@ public class Manager implements Listener {
                     break;
                 case "2":
                     if(downloader.download(LINK_JSON)){
-                        getMessage("Загрузка прошла успешно");
+                        getMessage("Загрузка прошла успешно!");
                     }else{
-                        getMessage("Проверка наличия файла локально");
+                        getMessage("Проверка наличия копии файла локально");
                     }
                     if(new File("weather.json").exists()){
                         filepath="weather.json";

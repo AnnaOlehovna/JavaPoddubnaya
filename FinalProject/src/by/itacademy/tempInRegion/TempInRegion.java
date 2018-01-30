@@ -68,7 +68,7 @@ public class TempInRegion {
             }
         }
         for (HashMap.Entry<City,ArrayList<Integer>> entry:hashMap.entrySet()) {
-            int summ = 0;
+            double summ = 0;
             for (Integer temp: entry.getValue()){
                 summ=summ+temp;
             }
